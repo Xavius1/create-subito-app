@@ -1,0 +1,6 @@
+type SubitoAppQuery {
+}
+
+extend type Query {
+  subitoapp: SubitoAppQuery
+}

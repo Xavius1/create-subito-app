@@ -1,0 +1,62 @@
+#! /usr/bin/env node
+(async()=> {
+    
+  const { opendir } = require('fs/promises');
+  const execSync = require('child_process').execSync;
+  const path = require('path');
+
+  const repoName = process.argv[2];
+  const interfaceType = process.argv[3] || 'graphql';
+
+  if(!repoName || typeof repoName !== 'string' || repoName.length < 2) {
+    console.error('Repo name must be defined.');
+    return;
+  }
+
+  const binPath = process.argv[1];
+  const binDir = path.dirname(binPath);
+  const packageDir = `${binDir}/..`
+  const helperDir = `${packageDir}/lib/helpers`
+  const runPath = process.cwd();
+  const projectPath = `${runPath}/${repoName}`
+
+  const appPath = `${packageDir}/lib/apps/${interfaceType}`;
+  const corePath = `${packageDir}/lib/apps/core`;
+
+  try {
+    console.log('Starting...')
+    // Copy app
+    console.log('1/6 - Copy subito app');
+    execSync(`cp -R ${appPath} ${projectPath}`);
+    // Copy core files
+    console.log('2/6 - Copy core files');
+    execSync(`cp -R ${corePath} ${projectPath}`);
+    // Get all possible formatted names
+    console.log('3/6 - Define var names');
+    const getNames = require(`${helperDir}/getNames.js`);
+    // Merge packages files
+    console.log('4/7 - Prepare dependencies');
+    const copyPackages = require(`${helperDir}/copyPackages.js`);
+    copyPackages(appPath, corePath, projectPath);
+    // Change names aliases into folders & files name & content
+    console.log('4/6 - Replace aliases');
+    const setAlias = require(`${helperDir}/setAlias.js`);
+    const names = getNames(repoName);
+    setAlias(names, projectPath);
+    // Install dependencies
+    // console.log('5/6 - Install dependencies');
+    // execSync(`npm ci`, { cwd: projectPath });
+    // Init git repository
+    console.log('6/6 - Init git repository');
+    execSync(`git init -b main`, { cwd: projectPath });
+    // End
+    console.log('Your subito project is ready.')
+    console.log('')
+    console.log('Add a remote to your repository:');
+    console.log('git remote add origin -url-');
+    return;
+  } catch(err) {
+    console.log(err);
+  }
+
+})()

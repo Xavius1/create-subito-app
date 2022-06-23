@@ -1,0 +1,68 @@
+options:
+  docker: true
+
+image: node:16.15.1-slim
+
+definitions:
+  steps:    
+    - step: &audit
+        name: Audits
+#        caches:
+ #         - node
+        script:
+          - apt-get update && apt-get install -y git
+          - npm ci
+          - npx subito-audit-js
+        artifacts:
+          - node_modules/**
+    - step: &test
+        name: Tests
+        caches:
+          - node
+        script:
+          - apt-get update && apt-get install -y git
+          - npm ci
+          - npx test-js
+          - npx test-schema
+        artifacts:
+          - node_modules/**
+          - tag.txt
+          - build.txt
+          - slug.txt
+    - step: &build
+        name: Builds
+        caches:
+          - node
+        script: 
+          - npx compile-js
+          - npx build-types
+          - npx build-doc
+          - npx build-dist
+          - npx build-image
+        artifacts:
+          - node_modules/**
+          - tag.txt
+          - build.txt
+          - slug.txt
+          - dist/**
+          - doc/**
+    - step: &push-image-gcr
+        name: Push image to GCR
+        image: google/cloud-sdk:alpine
+        caches:
+          - node
+        script:
+          - npx push-image gcr
+    - step: &push-image
+        name: Push image to registry
+        image: google/cloud-sdk:alpine
+        caches:
+          - node
+        script:
+          - npx push-image
+pipelines:
+  default:
+    - step: *audit
+    - step: *test
+    - step: *build
+    - step: *push-image-gcr

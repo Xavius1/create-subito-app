@@ -1,0 +1,25 @@
+{
+  "name": "create-subito-app",
+  "version": "0.0.1",
+  "description": "Create a subito microservice in one command",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "bin": {
+    "create-subito-app": "./bin/create-app"
+  },
+  "engines": {
+    "node": ">=16"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Xavius1/create-subito-graphql-app.git"
+  },
+  "author": "Xavius",
+  "license": "EUPL-1.2",
+  "bugs": {
+    "url": "https://github.com/Xavius1/create-subito-graphql-app/issues"
+  },
+  "homepage": "https://github.com/Xavius1/create-subito-graphql-app#readme"
+}

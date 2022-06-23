@@ -1,0 +1,6 @@
+type SubitoAppMutation {
+}
+
+extend type Mutation {
+  subitoapp: SubitoAppMutation
+}

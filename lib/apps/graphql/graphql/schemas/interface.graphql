@@ -1,0 +1,20 @@
+interface MutationPayload {
+  code: Int!
+  success: Boolean!
+  message: String!
+  node: Node
+}
+
+interface Node {
+  id: ID!
+}
+
+interface CursorPaginator {
+  edges: [Edge]
+  pageInfo: PageInfo!
+}
+
+interface Edge {
+  cursor: String!
+  node: Node
+}
