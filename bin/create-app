@@ -15,7 +15,7 @@
 
   const binPath = process.argv[1];
   const binDir = path.dirname(binPath);
-  const packageDir = `${binDir}/..`
+  const packageDir = `${binDir}/../create-subito-app`
   const helperDir = `${packageDir}/lib/helpers`
   const runPath = process.cwd();
   const projectPath = `${runPath}/${repoName}`
@@ -27,10 +27,10 @@
     console.log('Starting...')
     // Copy app
     console.log('1/6 - Copy subito app');
-    execSync(`cp -R ${appPath} ${projectPath}`);
+    execSync(`cp -R ${appPath}/ ${projectPath}`);
     // Copy core files
     console.log('2/6 - Copy core files');
-    execSync(`cp -R ${corePath} ${projectPath}`);
+    execSync(`cp -R ${corePath}/ ${projectPath}`);
     // Get all possible formatted names
     console.log('3/6 - Define var names');
     const getNames = require(`${helperDir}/getNames.js`);
@@ -43,6 +43,9 @@
     const setAlias = require(`${helperDir}/setAlias.js`);
     const names = getNames(repoName);
     setAlias(names, projectPath);
+    // Rename specials files
+    execSync(`mv ${projectPath}/_gitignore ${projectPath}/.gitignore`);
+    execSync(`mv ${projectPath}/_npmrc ${projectPath}/.npmrc`);
     // Install dependencies
     // console.log('5/6 - Install dependencies');
     // execSync(`npm ci`, { cwd: projectPath });

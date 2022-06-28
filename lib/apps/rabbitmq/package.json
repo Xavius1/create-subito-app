@@ -1,0 +1,8 @@
+{
+  "name": "subito-app",
+  "description": "A subito micro service with rabbitmq interface",
+  "dependencies": {
+    "amqplib": "0.10.0",
+    "argv": "0.0.2"
+  }
+}
