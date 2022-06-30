@@ -47,8 +47,8 @@
     execSync(`mv ${projectPath}/_gitignore ${projectPath}/.gitignore`);
     execSync(`mv ${projectPath}/_npmrc ${projectPath}/.npmrc`);
     // Install dependencies
-    // console.log('5/6 - Install dependencies');
-    // execSync(`npm ci`, { cwd: projectPath });
+    console.log('5/6 - Install dependencies');
+    execSync(`npm ci`, { cwd: projectPath });
     // Init git repository
     console.log('6/6 - Init git repository');
     execSync(`git init -b main`, { cwd: projectPath });
