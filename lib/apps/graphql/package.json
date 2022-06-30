@@ -1,5 +1,6 @@
 {
   "name": "subito-app",
+  "version": "0.5.0",
   "description": "A subito micro service with graphql interface",
   "dependencies": {
     "@apollo/subgraph": "2.0.5",
