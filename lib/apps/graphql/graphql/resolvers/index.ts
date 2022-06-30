@@ -1,8 +1,8 @@
-import { 
-  DefaultScalarsResolver, 
-  DefaultCursorResolver, 
-  DefaultPageInfoResolver, 
-  DefaultEntityResolver 
+import {
+  DefaultScalarsResolver,
+  DefaultCursorResolver,
+  DefaultPageInfoResolver,
+  DefaultEntityResolver,
 } from 'subito-graphql';
 import Mutation from './_MutationResolver.js';
 import Query from './_QueryResolver.js';

@@ -44,9 +44,9 @@ const env = Env.getAll([
   // ['MONGODB_MAIN_NAME', { defaultValue: 'app' }], // db name
   // ['MONGODB_MAIN_AUTH', { defaultValue: 'app' }], // db auth name
   // ['MONGODB_MAIN_REPLICASET', { defaultValue: 'rs0' }], // replica set name
-  // ['MONGODB_SUBITOAPP_COLLECTION', { defaultValue: 'subitoapp' }], // subitoapp collection name
-  // ['MONGODB_SUBITOAPP_CURSOR_NAME', { defaultValue: 'createdAt' }], // subitoapp default cursor name
-  // ['MONGODB_SUBITOAPP_CURSOR_TYPE', { defaultValue: 'Date' }], // subitoapp default cursor type
+  // ['MONGODB_SUBITOAPP_NAME', { defaultValue: 'subitoapp' }], // subitoapp collection name
+  // ['MONGODB_SUBITOAPP_CURSOR', { defaultValue: 'createdAt' }], // subitoapp default cursor name
+  // ['MONGODB_SUBITOAPP_CSTYPE', { defaultValue: 'Date' }], // subitoapp default cursor type
 ]);
 
 export default env;

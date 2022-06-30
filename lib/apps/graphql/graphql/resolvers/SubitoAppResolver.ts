@@ -3,8 +3,8 @@
  * They can call services as repositories
  * Here we map entities fields with the graphql schema
  * Also here that we care to match the GraphQL/RelayJS conventions
- * 
- * Resolvers call the security layer to handle ABAC (via Frontier) before performing operations or 
+ *
+ * Resolvers call the security layer to handle ABAC (via Frontier) before performing operations or
  * returning data
  * NEVER FORGET to call the security layer, if not your API will be at VERY HIGH risks !
  */

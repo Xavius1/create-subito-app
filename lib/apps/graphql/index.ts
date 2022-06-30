@@ -11,6 +11,7 @@ import { Token } from 'subito-lib';
 // import SubitoAppService from './services/SubitoApp/SubitoAppService';
 import e from './security/env';
 import resolvers from './graphql/resolvers/index';
+
 (async () => {
   // Uncomment this code if you need a MongoDB connection
   // const db = await new MongoDBConnector(
@@ -34,11 +35,11 @@ import resolvers from './graphql/resolvers/index';
     dataSources: () => ({
       // Uncomment the next 3 lines if you need a repository
       // SubitoApps: new SubitoApps(
-        // db.collection(e.MONGODB_COLLECTION_SUBITOAPP)
+      //   db.collection(e.MONGODB_SUBITOAPP_NAME)
       // ),
     }),
     context: ({ req }) => ({
-      // @ts-ignore: TODO Deal with x-app-token type define as "string | string[]", should be "string"
+      // @ts-ignore TODO Deal with x-app-token type define as "string | string[]" should be "string"
       app: (req.headers['x-app-token'] ? Token.read(req.headers['x-app-token']) : null),
       headers: req.headers,
       gateway: req.headers['x-gateway'],
@@ -52,6 +53,6 @@ import resolvers from './graphql/resolvers/index';
   });
 
   server.listen(4001).then(({ url }) => {
-    console.log(`SubitoApp server ready at ${url}`)
+    console.log(`SubitoApp server ready at ${url}`); // eslint-disable-line no-console
   });
 })();
