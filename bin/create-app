@@ -25,12 +25,12 @@
 
   try {
     console.log('Starting...')
-    // Copy app
-    console.log('1/6 - Copy subito app');
-    execSync(`cp -R ${appPath}/ ${projectPath}`);
     // Copy core files
-    console.log('2/6 - Copy core files');
+    console.log('1/6 - Copy core files');
     execSync(`cp -R ${corePath}/ ${projectPath}`);
+    // Copy app
+    console.log('2/6 - Copy subito app');
+    execSync(`cp -R ${appPath}/ ${projectPath}`);
     // Get all possible formatted names
     console.log('3/6 - Define var names');
     const getNames = require(`${helperDir}/getNames.js`);
