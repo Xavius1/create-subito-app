@@ -4,7 +4,7 @@ const QueryResolver = {
   subitoapp() {
     return {
       SubitoApp: DefaultQueryResolver('SubitoApps'),
-    }
+    };
   },
 };
 

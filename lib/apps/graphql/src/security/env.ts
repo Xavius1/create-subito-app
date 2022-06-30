@@ -3,24 +3,24 @@ import { Env } from 'subito-lib';
 const env = Env.getAll([
   /**
    * NODE_ENV accepts "development", "test" & "production" values
-   * Its default value is "development" if not set on host 
-   * 
-   * Default value doesn't apply when APP_ENV = "staging" | "production", 
+   * Its default value is "development" if not set on host
+   *
+   * Default value doesn't apply when APP_ENV = "staging" | "production",
    * as for all defaults set with Env class
    */
-  ['NODE_ENV'], 
+  ['NODE_ENV'],
   /**
    * APP_ENV accepts "local", "current", "develop", "integration", "staging" & "production" values
    * Its default value is "local"
    */
-  ['APP_ENV'], 
+  ['APP_ENV'],
   /**
    * If PWD is not set by NodeJS then it will be initialized by Env
    */
   ['PWD'],
   /**
    * You can set defaultValue for an env var that is not defined
-   * It will be use on all APP_ENV excepts "staging" & "production" 
+   * It will be use on all APP_ENV excepts "staging" & "production"
    */
   ['INTERNAL_GATEWAY', { defaultValue: 'server' }],
   ['FORCE_DEBUG', { defaultValue: 'false' }],
