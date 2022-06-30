@@ -1,0 +1,124 @@
+"""
+Entity (SubitoAppSubitoApp)
+"""
+type SubitoAppSubitoApp implements Node {
+  id: ID!
+  createdAt: DateTime
+  deletedAt: DateTime
+  # sidecar: SubitoAppSubitoAppSidecar
+}
+
+# """
+# Sidecar (SubitoAppSubitoApp)
+# """
+# type SubitoAppSubitoAppSidecar {
+#   OtherEntity: SubitoAppOtherEntityQuery
+# }
+
+"""
+Payload (SubitoAppSubitoApp)
+"""
+type SubitoAppSubitoAppPayload implements MutationPayload {
+  code: Int!
+  success: Boolean!
+  message: String!
+  node: SubitoAppSubitoApp
+}
+
+"""
+Create Input (SubitoAppSubitoApp)
+"""
+input CreateSubitoAppSubitoAppInput {
+  field: NonEmptyString!
+}
+
+"""
+Update Input (SubitoAppSubitoApp)
+"""
+input UpdateSubitoAppSubitoAppInput implements UpdateInput {
+  id: ID!
+  values: UpdateSubitoAppSubitoAppValuesInput
+}
+
+"""
+Update Values Input (SubitoAppSubitoApp)
+"""
+input UpdateSubitoAppSubitoAppValuesInput {
+  field: NonEmptyString
+}
+
+"""
+Delete Input (SubitoAppSubitoApp)
+"""
+input DeleteSubitoAppSubitoAppInput implements DeleteInput {
+  id: ID!
+}
+
+"""
+Dependency (CursorPaginator)
+Used by: Query
+Description: It uses the cursor paginator pattern
+"""
+type SubitoAppSubitoAppCursorPaginator implements CursorPaginator {
+  edges: [SubitoAppSubitoAppEdge]
+  pageInfo: SubitoAppSubitoAppPageInfo!
+}
+
+"""
+Dependency (PageInfo)
+Used by: CursorPaginator
+Description: Paginator specifications
+"""
+type SubitoAppSubitoAppPageInfo implements PageInfo {
+  hasNextPage: Boolean!
+  hasPreviousPage: Boolean!
+  startCursor: String
+  endCursor: String
+  currentPage: Int
+  totalPage: Int
+}
+
+"""
+Dependency (Edge)
+Used by: CursorPaginator
+Description: It uses the cursor paginator pattern
+"""
+type SubitoAppSubitoAppEdge implements Edge {
+  cursor: String!
+  node: SubitoAppSubitoApp
+}
+
+"""
+Dependency (Filters)
+Used by: Query
+Description: Fields that can be used to find specifics docs
+"""
+input SubitoAppSubitoAppFilters implements QueryFilters {
+  id: ID
+  withDeleted: Boolean
+}
+
+"""
+Query (SubitoAppSubitoApp)
+"""
+type SubitoAppSubitoAppQuery {
+  getOne(id: String!, type: IdType): SubitoAppSubitoApp
+  getMany(
+    paginator: PaginatorType, 
+    first: Int, 
+    after: String, 
+    last: Int, 
+    before: String, 
+    filters: SubitoAppSubitoAppFilters
+  ): SubitoAppSubitoAppCursorPaginator
+  # getAll(): [SubitoAppSubitoApp]
+}
+
+"""
+Mutation (SubitoAppSubitoApp)
+"""
+type SubitoAppSubitoAppMutation {
+  create(input: CreateSubitoAppSubitoAppInput): SubitoAppSubitoAppPayload
+  delete(input: DeleteSubitoAppSubitoAppInput): SubitoAppSubitoAppPayload
+  update(input: UpdateSubitoAppSubitoAppInput): SubitoAppSubitoAppPayload
+}

@@ -1,8 +1,9 @@
-/* eslint-disable class-methods-use-this */
-class SubitoAppService {
-  run(obj, args, context) { 
-    return { obj, args, context };
-  }
-}
+/**
+ * Services handle the business layer
+ * They can called all repositories & even other services
+ */
+// Uncomment the next lines if you need to write a service
+// class SubitoAppService {
+// }
 
-export default SubitoAppService;
+// export default SubitoAppService;

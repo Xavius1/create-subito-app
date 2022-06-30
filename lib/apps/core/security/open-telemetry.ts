@@ -3,7 +3,7 @@ import e from './env.js';
 
 if (e.NODE_ENV !== 'local') {
   new OpenTelemetry({
-    type: 'das',
-    name: 'das',
+    type: 'subitotype',
+    name: 'subitoapp',
   }).record();
 }

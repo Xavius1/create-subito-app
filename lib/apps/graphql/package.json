@@ -2,6 +2,10 @@
   "name": "subito-app",
   "description": "A subito micro service with graphql interface",
   "dependencies": {
-    "subito-graphql": "0.2.0"
+    "@apollo/subgraph": "2.0.5",
+    "apollo-server": "3.9.0",
+    "apollo-server-core": "3.9.0",
+    "graphql-import-files": "1.0.18",
+    "subito-graphql": "0.3.0"
   }
 }

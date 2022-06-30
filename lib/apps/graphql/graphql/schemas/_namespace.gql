@@ -1,0 +1,23 @@
+"""
+Query (SubitoApp Namespace)
+"""
+type SubitoAppQuery {
+  SubitoApp: SubitoAppSubitoAppQuery
+}
+
+"""
+Mutation (SubitoApp Namespace)
+"""
+type SubitoAppMutation {
+  SubitoApp: SubitoAppSubitoAppMutation
+}
+
+# Query (root)
+type Query {
+  subitoapp: SubitoAppQuery
+}
+
+# Mutation (root)
+type Mutation {
+  subitoapp: SubitoAppMutation
+}

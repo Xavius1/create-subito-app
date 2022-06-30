@@ -1,3 +1,9 @@
+/**
+ * Repositories handle data layer
+ * They can't call other repositories nor services
+ * All queries are done inside repositories then called via methods with params
+ * Never write queries outside of a repository
+ */
 import QUERY_SAMPLE from './queries/QUERY_SAMPLE.js';
 import MUTATION_SAMPLE from './queries/MUTATION_SAMPLE.js';
 
