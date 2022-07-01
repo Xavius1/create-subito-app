@@ -3,7 +3,7 @@ import { DefaultQueryResolver } from 'subito-graphql';
 const QueryResolver = {
   subitoapp() {
     return {
-      SubitoApp: DefaultQueryResolver('SubitoApps'),
+      SubitoApp: DefaultQueryResolver('SubitoApp'),
     };
   },
 };

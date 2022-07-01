@@ -3,7 +3,7 @@ import { DefaultMutationResolver } from 'subito-graphql';
 const MutationResolver = {
   subitoapp() {
     return {
-      SubitoApp: DefaultMutationResolver('SubitoApps'),
+      SubitoApp: DefaultMutationResolver('SubitoApp'),
     };
   },
 };

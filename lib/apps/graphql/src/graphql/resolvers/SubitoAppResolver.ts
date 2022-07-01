@@ -10,7 +10,7 @@
  */
 // Uncomment this code if you need a custom resolver for your entity
 // If so, don't forget to add it in your customs resolvers into index.ts file
-// import DefaultEntityResolver from 'subito-graphql';
+// import { DefaultEntityResolver } from 'subito-graphql';
 
 // const SubitoAppResolver = {
 //   ...DefaultEntityResolver,

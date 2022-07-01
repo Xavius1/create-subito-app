@@ -1,3 +1,8 @@
+/**
+ * SubitoApp - Describe its role here
+ *
+ * @packageDocumentation
+ */
 import './security/open-telemetry';
 import { ApolloServer } from 'apollo-server';
 import { ApolloServerPluginUsageReportingDisabled } from 'apollo-server-core';
@@ -10,8 +15,8 @@ import { Token } from 'subito-lib';
 // Uncomment the next line if you need a service
 // import SubitoAppService from './services/SubitoApp/SubitoAppService';
 import e from './security/env';
+import Abac from './security/Abac';
 import resolvers from './graphql/resolvers/index';
-
 (async () => {
   // Uncomment this code if you need a MongoDB connection
   // const db = await new MongoDBConnector(
@@ -37,6 +42,8 @@ import resolvers from './graphql/resolvers/index';
       // SubitoApps: new SubitoApps(
       //   db.collection(e.MONGODB_SUBITOAPP_NAME)
       // ),
+      // We put Abac into data sources to have access to the context
+      Abac: new Abac(),
     }),
     context: ({ req }) => ({
       // @ts-ignore TODO Deal with x-app-token type define as "string | string[]" should be "string"

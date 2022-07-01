@@ -1,5 +1,10 @@
 import { Env } from 'subito-lib';
 
+/**
+ * List all vars used by the app
+ * 
+ * @public
+ */
 const env = Env.getAll([
   /**
    * NODE_ENV accepts "development", "test" & "production" values
