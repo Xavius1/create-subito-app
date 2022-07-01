@@ -17,6 +17,7 @@ import { Token } from 'subito-lib';
 import e from './security/env';
 import Abac from './security/Abac';
 import resolvers from './graphql/resolvers/index';
+
 (async () => {
   // Uncomment this code if you need a MongoDB connection
   // const db = await new MongoDBConnector(
