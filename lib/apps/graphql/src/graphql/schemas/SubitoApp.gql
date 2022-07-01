@@ -4,7 +4,7 @@ Entity (SubitoAppSubitoApp)
 type SubitoAppSubitoApp implements Node {
   id: ID!
   createdAt: DateTime
-  deletedAt: DateTime
+  deletedAt: DateTime # Subito perform soft deletion
   # sidecar: SubitoAppSubitoAppSidecar
 }
 

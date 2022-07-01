@@ -5,7 +5,7 @@ import type { AnyObject } from 'subito-graphql';
 // const map = { _id: 'id' }; // eslint-disable-line no-underscore-dangle
 
 /**
- * SubitoAppAbac policy
+ * SubitoAppAbac policy - Write your rules here
  *
  * @public
  */

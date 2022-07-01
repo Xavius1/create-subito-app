@@ -2,7 +2,7 @@ import { Abac as Base } from 'subito-graphql';
 import SubitoAppAbac from './policies/SubitoAppAbac';
 
 /**
- * Abac policies
+ * Abac handles security layer - Define all your policies here
  *
  * @public
  */
