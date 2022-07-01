@@ -1,45 +1,50 @@
 #! /usr/bin/env node
+
+
 (async()=> {
-    
+  
   const { opendir } = require('fs/promises');
   const execSync = require('child_process').execSync;
   const path = require('path');
-
+  
   const repoName = process.argv[2];
   const interfaceType = process.argv[3] || 'graphql';
-
+  
   if(!repoName || typeof repoName !== 'string' || repoName.length < 2) {
     console.error('Repo name must be defined.');
     return;
   }
-
+  
   const binPath = process.argv[1];
   const binDir = path.dirname(binPath);
-  const packageDir = `${binDir}/../create-subito-app`
-  const helperDir = `${packageDir}/lib/helpers`
+  const packageDir = `${binDir}/../create-subito-app`;
+  const helperDir = `${packageDir}/lib/helpers`;
   const runPath = process.cwd();
-  const projectPath = `${runPath}/${repoName}`
-
+  
   const appPath = `${packageDir}/lib/apps/${interfaceType}`;
   const corePath = `${packageDir}/lib/apps/core`;
+  
+  const getType = require(`${helperDir}/getType.js`);
+  const appType = getType(interfaceType);
+  const projectPath = `${runPath}/${appType}-${repoName}`;
 
   try {
     console.log('Starting...')
     // Copy core files
-    console.log('1/6 - Copy core files');
+    console.log('1/7 - Copy core files');
     execSync(`cp -R ${corePath}/ ${projectPath}`);
     // Copy app
-    console.log('2/6 - Copy subito app');
+    console.log('2/7 - Copy subito app');
     execSync(`cp -R ${appPath}/ ${projectPath}`);
     // Get all possible formatted names
-    console.log('3/6 - Define var names');
+    console.log('3/7 - Define var names');
     const getNames = require(`${helperDir}/getNames.js`);
     // Merge packages files
     console.log('4/7 - Prepare dependencies');
     const copyPackages = require(`${helperDir}/copyPackages.js`);
     copyPackages(appPath, corePath, projectPath);
     // Change names aliases into folders & files name & content
-    console.log('4/6 - Replace aliases');
+    console.log('5/7 - Replace aliases');
     const setAlias = require(`${helperDir}/setAlias.js`);
     const names = getNames(repoName);
     setAlias(names, projectPath);
@@ -47,13 +52,13 @@
     execSync(`mv ${projectPath}/_gitignore ${projectPath}/.gitignore`);
     execSync(`mv ${projectPath}/_npmrc ${projectPath}/.npmrc`);
     // Install dependencies
-    console.log('5/6 - Install dependencies');
+    console.log('6/7 - Install dependencies');
     execSync(`npm ci`, { cwd: projectPath });
     // Init git repository
-    console.log('6/6 - Init git repository');
+    console.log('7/7 - Init git repository');
     execSync(`git init -b main`, { cwd: projectPath });
     // End
-    console.log('Your subito project is ready.')
+    console.log('Your subito app is ready.')
     console.log('')
     console.log('Add a remote to your repository:');
     console.log('git remote add origin -url-');

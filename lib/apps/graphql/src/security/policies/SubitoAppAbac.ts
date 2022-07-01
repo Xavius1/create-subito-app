@@ -6,7 +6,7 @@ import type { AnyObject } from 'subito-graphql';
 
 /**
  * SubitoAppAbac policy
- * 
+ *
  * @public
  */
 class SubitoAppAbac extends Policy {
