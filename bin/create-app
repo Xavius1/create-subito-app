@@ -46,7 +46,7 @@
     // Change names aliases into folders & files name & content
     console.log('5/7 - Replace aliases');
     const setAlias = require(`${helperDir}/setAlias.js`);
-    const names = getNames(repoName);
+    const names = getNames(repoName, appType);
     setAlias(names, projectPath);
     // Rename specials files
     execSync(`mv ${projectPath}/_gitignore ${projectPath}/.gitignore`);
