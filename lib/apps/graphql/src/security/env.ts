@@ -31,7 +31,8 @@ const env = Env.getAll([
   Env.newSecret('SERVICE_AUTH_KEY'),
   /**
    * With newEnv, you set vars with default value
-   * It will be use on all APP_ENV excepts "staging" & "production" (where you need to define it on host)
+   * It will be use on all APP_ENV excepts "staging" & "production"
+   * (where you need to define it on host)
    */
   Env.newEnv('INTERNAL_GATEWAY', { defaultValue: 'server' }),
   /**

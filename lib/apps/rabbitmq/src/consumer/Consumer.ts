@@ -1,4 +1,4 @@
-import type { Channel, Connection, Message } from '@types/amqplib';
+import type { Channel, Connection, Message } from 'amqplib';
 import amqp from 'amqplib';
 import argv from 'argv';
 import e from '../security/env.js';
@@ -12,12 +12,12 @@ class Consumer {
   protected args: unknown;
 
   protected context;
-  
-  protected broker: Connection;
-  
-  protected channel: Channel;
-  
-  protected queue: string;
+
+  protected broker: Connection | null = null;
+
+  protected channel: Channel | null = null;
+
+  protected queue: string = '';
 
   constructor(context) {
     this.args = this.readArgs(process.argv.slice(2)); // eslint-disable-lin
@@ -42,7 +42,7 @@ class Consumer {
   async consume() {
     const { channel, queue } = this;
 
-    channel.consume(queue, async (msg) => {
+    channel?.consume(queue, async (msg) => {
       if (msg !== null) {
         try {
           await this.run(JSON.parse(msg.content.toString()));
@@ -68,7 +68,7 @@ class Consumer {
   }
 
   async publish(queue: string, msg: unknown) {
-    return this.channel.sendToQueue(queue, Buffer.from(JSON.stringify(msg)));
+    return this.channel?.sendToQueue(queue, Buffer.from(JSON.stringify(msg)));
   }
 
   readArgs(args: string[]) { 

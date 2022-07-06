@@ -31,7 +31,8 @@ const env = Env.getAll([
   Env.newSecret('SERVICE_AUTH_KEY'),
   /**
    * With newEnv, you set vars with default value
-   * It will be use on all APP_ENV excepts "staging" & "production" (where you need to define it on host)
+   * It will be use on all APP_ENV excepts "staging" & "production"
+   * (where you need to define it on host)
    */
   Env.newEnv('INTERNAL_GATEWAY', { defaultValue: 'server' }),
   /**
@@ -52,7 +53,7 @@ const env = Env.getAll([
    * but anyone can change the value via host env vars, as needed
    * Even more valuable, this can be customized at the deployment step depending on the environment
    */
-  Env.newVar('SUBITOAPP_QUEUE_NAME', 'subito-queue'),
+  Env.newVar('SUBITOAPP_QUEUE_NAME', { defaultValue: 'subito-queue' }),
 ]);
 
 export default env;
