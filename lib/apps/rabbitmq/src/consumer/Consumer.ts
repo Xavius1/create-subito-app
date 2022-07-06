@@ -1,10 +1,22 @@
+import type { AMQPQueue } from '@type/amqp';
 import amqp from 'amqplib';
 import argv from 'argv';
 import e from '../security/env.js';
+import args from '../security/args';
 
+/**
+ * Consumer handle the interface layer
+ * NEVER modify this file
+ */
 class Consumer {
+  protected args: string[];
+  protected context;
+  protected broker;
+  protected channel;
+  protected queue: AMQPQueue;
+
   constructor(context) {
-    this.args = process.argv.slice(2);
+    this.args = process.argv.slice(2); // eslint-disable-lin
     this.context = { ...context };
     this.context.Consumer = this;
   }
@@ -42,9 +54,9 @@ class Consumer {
 
   async run(msg) {
     const { args, context } = this;
-    const { services: { Subito } } = context;
-    console.log('🚀 Subito receives a message');
-    return Subito.run(
+    const { services: { SubitoApp } } = context;
+    console.log('🚀 SubitoApp receives a message');
+    return SubitoApp.run(
       msg,
       this.readArgs(args),
       context,
@@ -56,18 +68,9 @@ class Consumer {
   }
 
   readArgs(args) {
-    this.defineArgs();
+    args();
     const { options } = argv.run(args);
     return options;
-  }
-
-  defineArgs() { // eslint-disable-line class-methods-use-this
-    // argv.option({
-    //   name: 'first',
-    //   short: 'f',
-    //   type: 'int',
-    //   description: 'Number of iteration by batch',
-    // });
   }
 }
 

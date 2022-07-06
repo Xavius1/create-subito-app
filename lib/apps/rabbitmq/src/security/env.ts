@@ -2,7 +2,7 @@ import { Env } from 'subito-lib';
 
 /**
  * List all used vars by the app
- * 
+ *
  * @public
  */
 const env = Env.getAll([
@@ -19,7 +19,7 @@ const env = Env.getAll([
    */
   ['APP_ENV'],
   /**
-   * If PWD is not set by the server then it will be initialized by Env
+   * If PWD is not set by NodeJS then it will be initialized by Env
    */
   ['PWD'],
   /**
@@ -39,6 +39,12 @@ const env = Env.getAll([
    * This default value will be use everywhere, even when APP_ENV set to "staging" or "production"
    */
   Env.newVar('FORCE_DEBUG', { defaultValue: false, parseType: 'boolean' }),
+  /**
+   * Config Rabbitmq
+   */
+  Env.newEnv('RABBITMQ_HOST', { defaultValue: 'rabbitmq' }),
+  Env.newEnv('RABBITMQ_LOGIN', { defaultValue: 'guest' }),
+  Env.newEnv('RABBITMQ_PASSWORD', { defaultValue: 'guest' }),
   /**
    * Never hard-coded variable into your code
    * Instead, put it here  with newVar() then set a default value

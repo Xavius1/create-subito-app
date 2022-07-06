@@ -1,4 +1,5 @@
 import e from './env.js';
+import type { EnvType } from 'subito-lib';
 
 describe('env.js', () => {
   // NODE_ENV
@@ -22,12 +23,22 @@ describe('env.js', () => {
   // SERVICE_AUTH_KEY
   test('SERVICE_AUTH_KEY type should be', () => {
     expect(e._types.SERVICE_AUTH_KEY) // eslint-disable-line no-underscore-dangle
-      .toBe('secret');
+      .toBe(EnvType.SECRET);
   });
 
   // PWD
   test('PWD type should be', () => {
     expect(e._types.PWD) // eslint-disable-line no-underscore-dangle
-      .toBe('secret');
+      .toBe(EnvType.SECRET);
+  });
+
+  // FORCE_DEBUG
+  test('FORCE_DEBUG type should be', () => {
+    expect(e._types.PWD) // eslint-disable-line no-underscore-dangle
+      .toBe(EnvType.VAR);
+  });
+  test('FORCE_DEBUG default value should be', () => {
+    expect(e._defaultValues.FORCE_DEBUG) // eslint-disable-line no-underscore-dangle
+      .toBe(true);
   });
 });

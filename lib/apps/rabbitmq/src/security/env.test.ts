@@ -46,4 +46,18 @@ describe('env.js', () => {
     expect(e._defaultValues.FORCE_DEBUG) // eslint-disable-line no-underscore-dangle
       .toBe(true);
   });
+
+  // Rabbitmq
+  test('RABBITMQ_HOST default value should be', () => {
+    expect(e._defaultValues.RABBITMQ_HOST) // eslint-disable-line no-underscore-dangle
+      .toBe('rabbitmq');
+  });
+  test('RABBITMQ_LOGIN default value should be', () => {
+    expect(e._defaultValues.RABBITMQ_LOGIN) // eslint-disable-line no-underscore-dangle
+      .toBe('guest');
+  });
+  test('RABBITMQ_PASSWORD default value should be', () => {
+    expect(e._defaultValues.RABBITMQ_PASSWORD) // eslint-disable-line no-underscore-dangle
+      .toBe('guest');
+  });
 });
