@@ -52,6 +52,7 @@ const env = Env.getAll([
    * but anyone can change the value via host env vars, as needed
    * Even more valuable, this can be customized at the deployment step depending on the environment
    */
+  Env.newVar('SUBITOAPP_QUEUE_NAME', 'subito-queue'),
 ]);
 
 export default env;

@@ -1,27 +1,31 @@
-import type { AMQPQueue } from '@type/amqp';
+import type { Channel, Connection, Message } from '@types/amqplib';
 import amqp from 'amqplib';
 import argv from 'argv';
 import e from '../security/env.js';
-import args from '../security/args';
+import defineArgs from '../security/args';
 
 /**
  * Consumer handle the interface layer
  * NEVER modify this file
  */
 class Consumer {
-  protected args: string[];
+  protected args: unknown;
+
   protected context;
-  protected broker;
-  protected channel;
-  protected queue: AMQPQueue;
+  
+  protected broker: Connection;
+  
+  protected channel: Channel;
+  
+  protected queue: string;
 
   constructor(context) {
-    this.args = process.argv.slice(2); // eslint-disable-lin
+    this.args = this.readArgs(process.argv.slice(2)); // eslint-disable-lin
     this.context = { ...context };
     this.context.Consumer = this;
   }
 
-  async connect(queue) {
+  async connect(queue: string) {
     this.broker = await amqp.connect({
       hostname: e.RABBITMQ_HOST,
       username: e.RABBITMQ_LOGIN,
@@ -52,25 +56,27 @@ class Consumer {
     return true;
   }
 
-  async run(msg) {
+  async run(msg: Message) {
     const { args, context } = this;
     const { services: { SubitoApp } } = context;
-    console.log('🚀 SubitoApp receives a message');
+    console.log('🚀 SubitoApp receives a message'); // eslint-disable-line no-console
     return SubitoApp.run(
       msg,
-      this.readArgs(args),
+      args,
       context,
     );
   }
 
-  async publish(queue, msg) {
+  async publish(queue: string, msg: unknown) {
     return this.channel.sendToQueue(queue, Buffer.from(JSON.stringify(msg)));
   }
 
-  readArgs(args) {
-    args();
+  readArgs(args: string[]) { 
+    defineArgs();
     const { options } = argv.run(args);
-    return options;
+    this.args = options;
+
+    return this;
   }
 }
 
