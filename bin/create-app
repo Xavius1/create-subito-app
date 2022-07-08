@@ -24,7 +24,7 @@
   
   const corePath = `${packageDir}/lib/apps/core`;
   const appPath = `${packageDir}/lib/apps/${interfaceType}`;
-  const variantPath = null;
+  let variantPath = null;
   if (interfaceVariant) {
     variantPath = `${appPath}-${interfaceVariant}`;
   }
