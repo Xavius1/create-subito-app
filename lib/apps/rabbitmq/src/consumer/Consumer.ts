@@ -6,7 +6,9 @@ import defineArgs from '../security/args';
 
 /**
  * Consumer handle the interface layer
- * NEVER modify this file
+ * /!\ NEVER modify this file, put your business logic into SubitoAppService
+ * 
+ * @internal
  */
 class Consumer {
   protected args: unknown;

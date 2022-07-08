@@ -1,14 +1,14 @@
 import './security/open-telemetry';
-import { Gateway as GatewayLib, Thrower } from 'subito-lib';
+import { debugMode, GraphqlClient, Thrower } from 'subito-lib';
 import SubitoAppService from './services/SubitoApp/SubitoAppService';
-import Gateway from './repositories/gateway/Gateway';
+import Api from './repositories/Api/Api';
 import Consumer from './consumer/Consumer';
 import e from './security/env';
 
 (async () => {
   // Init gateway, we'll use it to request api
-  const gateway = new GatewayLib({});
-  const { success, auth } = await gateway.auth({ service: 'subitoapp', secret: e.SERVICE_AUTH_KEY });
+  const client = new GraphqlClient();
+  const { success, auth } = await client.auth({ service: 'subitoapp', secret: e.SERVICE_AUTH_KEY });
   if (!success) {
     Thrower.forbidden();
   }
@@ -17,12 +17,12 @@ import e from './security/env';
   const consumer = new Consumer({
     gateway: e.INTERNAL_GATEWAY,
     dataSources: {
-      Gateway: new Gateway(gateway),
+      Api: new Api(client),
     },
     services: {
       SubitoApp: new SubitoAppService(),
     },
-    debug: (e.NODE_ENV !== 'production'),
+    debug: debugMode(),
   });
 
   // Connect it to rabbitmq, you have to pass the queue name as param

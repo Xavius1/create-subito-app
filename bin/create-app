@@ -9,7 +9,8 @@
   
   const repoName = process.argv[2];
   const interfaceType = process.argv[3] || 'graphql';
-  
+  const interfaceVariant = process.argv[4];
+
   if(!repoName || typeof repoName !== 'string' || repoName.length < 2) {
     console.error('Repo name must be defined.');
     return;
@@ -21,8 +22,12 @@
   const helperDir = `${packageDir}/lib/helpers`;
   const runPath = process.cwd();
   
-  const appPath = `${packageDir}/lib/apps/${interfaceType}`;
   const corePath = `${packageDir}/lib/apps/core`;
+  const appPath = `${packageDir}/lib/apps/${interfaceType}`;
+  const variantPath = null;
+  if (interfaceVariant) {
+    variantPath = `${appPath}-${interfaceVariant}`;
+  }
   
   const getType = require(`${helperDir}/getType.js`);
   const appType = getType(interfaceType);
@@ -36,13 +41,18 @@
     // Copy app
     console.log('2/7 - Copy subito app');
     execSync(`cp -R ${appPath}/ ${projectPath}`);
+    // Copy variant
+    if (variantPath) {
+      console.log('2.5/7 - Copy subito app variant');
+      execSync(`cp -R ${variantPath}/ ${projectPath}`);
+    }
     // Get all possible formatted names
     console.log('3/7 - Define var names');
     const getNames = require(`${helperDir}/getNames.js`);
     // Merge packages files
     console.log('4/7 - Prepare dependencies');
     const copyPackages = require(`${helperDir}/copyPackages.js`);
-    copyPackages(appPath, corePath, projectPath);
+    copyPackages(appPath, variantPath, corePath, projectPath);
     // Change names aliases into folders & files name & content
     console.log('5/7 - Replace aliases');
     const setAlias = require(`${helperDir}/setAlias.js`);

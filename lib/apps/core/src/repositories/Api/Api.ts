@@ -4,16 +4,19 @@
  * All queries are done inside repositories then called via methods with params
  * Never write queries outside of a repository
  */
+import type { GraphQLClient } from 'subito-lib';
 import QUERY_SAMPLE from './queries/QUERY_SAMPLE.js';
 import MUTATION_SAMPLE from './queries/MUTATION_SAMPLE.js';
 
-class Gateway {
-  constructor(gateway) {
-    this.gateway = gateway;
+class Api {
+  protected client: GraphQLClient;
+  
+  constructor(client: GraphQLClient) {
+    this.client = client;
   }
 
   async getSample(id) {
-    const res = await this.gateway.execute(
+    const res = await this.client.execute(
       QUERY_SAMPLE,
       { id },
     );
@@ -21,11 +24,11 @@ class Gateway {
   }
 
   async setSample() {
-    const res = await this.gateway.execute(
+    const res = await this.client.execute(
       MUTATION_SAMPLE,
     );
     return res?.ref;
   }
 }
 
-export default Gateway;
+export default Api;

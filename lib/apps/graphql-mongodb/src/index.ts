@@ -9,13 +9,24 @@ import { ApolloServerPluginUsageReportingDisabled } from 'apollo-server-core';
 import { buildSubgraphSchema } from '@apollo/subgraph';
 import { loadFiles } from 'graphql-import-files';
 import { debugMode, Token } from 'subito-lib';
-// Uncomment the next line if you need a service
-// import SubitoAppService from './services/SubitoApp/SubitoAppService';
+import { MongoDBConnector } from 'subito-connector-mongodb';
+import SubitoApps from './repositories/SubitoApp/SubitoApps';
 import e from './security/env';
 import Abac from './security/Abac';
 import resolvers from './graphql/resolvers/index';
+// Uncomment the next line if you need a service
+// import SubitoAppService from './services/SubitoApp/SubitoAppService';
 
 (async () => {
+  const db = await new MongoDBConnector(
+    e.MONGODB_MAIN_LINK,
+    e.MONGODB_MAIN_NAME,
+    {
+      authSource: e.MONGODB_MAIN_AUTH,
+      replicatSet: e.MONGODB_MAIN_REPLICASET,
+    },
+  ).connect();
+
   const server = new ApolloServer({
     schema: buildSubgraphSchema([{
       typeDefs: loadFiles('./graphql/schemas/*.gql'),
@@ -26,6 +37,9 @@ import resolvers from './graphql/resolvers/index';
     ],
     // dataSources will be available into the context from resolvers layer
     dataSources: () => ({
+      SubitoApps: new SubitoApps(
+        db.collection(e.MONGODB_SUBITOAPP_NAME)
+      ),
       // We put Abac into data sources to have access to the context
       Abac: new Abac(),
     }),
@@ -50,8 +64,8 @@ import resolvers from './graphql/resolvers/index';
        * For example, a token created through the internal endpoint should not be used through 
        * the client endpoint and vice versa.
        */
-      viewer: (req.headers.authorization
-        ? Token.read(req.headers.authorization, { endpoint: req.headers['x-endpoint'] })
+      viewer: (req.headers.authorization 
+        ? Token.read(req.headers.authorization, { endpoint: req.headers['x-endpoint'] }) 
         : null
       ),
       services: {
