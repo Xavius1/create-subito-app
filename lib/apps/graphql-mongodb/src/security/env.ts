@@ -35,7 +35,7 @@ const env = Env.getAll([
   /**
    * Never hard-coded variable into your code
    * Instead, put it here with newSecret(), newEnv() or newVar() then set a default value
-   * You can also use aliases of newVar(): newBool(), newInt(), newFloat(), newDate & newArray()
+   * You can also use aliases of newVar(): newBool(), newInt(), newFloat() & newArray()
    * That way, other developers don't need to set env vars when they run your code,
    * but anyone can change the value via host env vars, as needed
    * Even more valuable, this can be customized at the deployment step depending on the environment

@@ -13,7 +13,7 @@ import { MongoDBConnector } from 'subito-connector-mongodb';
 import SubitoApps from './repositories/SubitoApp/SubitoApps';
 import e from './security/env';
 import Abac from './security/Abac';
-import resolvers from './graphql/resolvers/index';
+import resolvers from './graphql/resolvers/';
 // Uncomment the next line if you need a service
 // import SubitoAppService from './services/SubitoApp/SubitoAppService';
 
@@ -38,34 +38,41 @@ import resolvers from './graphql/resolvers/index';
     // dataSources will be available into the context from resolvers layer
     dataSources: () => ({
       SubitoApps: new SubitoApps(
-        db.collection(e.MONGODB_SUBITOAPP_NAME)
+        db.collection(e.MONGODB_SUBITOAPP_NAME),
       ),
       // We put Abac into data sources to have access to the context
       Abac: new Abac(),
     }),
     context: ({ req }) => ({
-      // @ts-ignore TODO Deal with x-app-token type define as "string | string[]" should be "string"
-      app: (req.headers['x-app-token'] ? Token.read(req.headers['x-app-token']) : null),
+      /**
+       * NEVER send clear app data from your endpoint.
+       * If someone gains direct access to your micro services, it makes a high security breach.
+       * Instead, always read the token at each micro service level.
+       * 
+       * Another security best practice is to create a token that contains the name of the endpoint
+       * use to generate it.
+       * This way, when you read it, you can verify the endpoint use to execute requests match the
+       * one use to created the token.
+       * For example, a token created through the internal endpoint should not be used through 
+       * the client endpoint and vice versa.
+       * 
+       * It's true for all kind of token (app, viewer, etc...)
+       */
+      app: (req.headers[e.HEADER_APP_TOKEN]
+        ? Token.read(req.headers[e.HEADER_APP_TOKEN], { endpoint: <string>req.headers[e.HEADER_ENDPOINT] })
+        : null
+      ),
       headers: req.headers,
       /**
        * Your endpoint should identify itself (client, internal, ...)
        * So you can use this data into the ABAC rules and when you read the viewer token (see below)
        */
-      endpoint: req.headers['x-endpoint'],
+      endpoint: req.headers[e.HEADER_ENDPOINT],
       /**
-       * NEVER send clear viewer data from your endpoint.
-       * If someone gains direct access to your micro services, it makes a high security breach.
-       * Instead, always read the viewer token at each micro service level.
-       * 
-       * Another security best practice is to create a token that contains the name of the endpoint
-       * use to generate it.
-       * This way, when you read it, you can verify the endpoint use to execute requests match the one
-       * use to created the token.
-       * For example, a token created through the internal endpoint should not be used through 
-       * the client endpoint and vice versa.
+       * KEEP IN MIND the token best practices written above
        */
-      viewer: (req.headers.authorization 
-        ? Token.read(req.headers.authorization, { endpoint: req.headers['x-endpoint'] }) 
+      viewer: (req.headers.authorization
+        ? Token.read(req.headers.authorization, { endpoint: <string>req.headers[e.HEADER_ENDPOINT] })
         : null
       ),
       services: {

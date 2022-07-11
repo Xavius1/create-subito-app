@@ -1,3 +1,4 @@
+import { GraphQLResolverMap } from '@apollo/subgraph/dist/schema-helper/resolverMap.js';
 import {
   DefaultScalarsResolver,
   DefaultCursorResolver,
@@ -9,11 +10,11 @@ import Query from './_QueryResolver.js';
 // import SubitoAppSubitoApp from './SubitoAppResolver.js';
 
 // List all entities here
-const entities = [
+const entities: string[] = [
   'SubitoApp',
 ];
 
-const resolvers = {
+const resolvers: GraphQLResolverMap = {
   ...DefaultScalarsResolver,
 
   Mutation,
@@ -30,6 +31,7 @@ entities.forEach((entity) => {
   resolvers[`${name}PageInfo`] = DefaultPageInfoResolver(name);
 
   if (!resolvers[name]) {
+    // @ts-ignore TODO Handle this error
     resolvers[name] = { ...DefaultEntityResolver };
   }
 });

@@ -7,6 +7,6 @@
     "apollo-server": "3.9.0",
     "apollo-server-core": "3.9.0",
     "graphql-import-files": "1.0.18",
-    "subito-graphql": "0.7.0"
+    "subito-graphql": "0.8.0"
   }
 }
