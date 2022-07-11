@@ -2,13 +2,13 @@
  * Repositories handle the data layer
  * They can't call other repositories nor services
  * All queries are done inside repositories then called via methods with params
- * /!\ NEVER write queries outside of a repository
+ * !! NEVER write queries outside of a repository
  */
-import MongoDBRepository from 'subito-connector-mongodb';
+import { Repository } from 'subito-connector-mongodb';
 // Uncomment the next line if you use env vars
 // import e from '../../security/env';
 
-class SubitoApps extends MongoDBRepository {
+class SubitoApps extends Repository {
   // constructor(collection) {
   //   super(collection);
   //   Define your custom default cursor here (if not, it will use the field createdAt)
