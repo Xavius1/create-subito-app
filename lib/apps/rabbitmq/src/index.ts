@@ -15,7 +15,7 @@ import e from './security/env';
 
   // Create consumer
   const consumer = new Consumer({
-    gateway: e.INTERNAL_GATEWAY,
+    endpoint: e.INTERNAL_GRAPHQL_ENDPOINT,
     dataSources: {
       Api: new Api(client),
     },

@@ -1,4 +1,4 @@
-import { Context } from "../../consumer/Consumer";
+import { Context } from '../../consumer/Consumer';
 
 /**
  * SubitoAppService handle new messages
