@@ -40,7 +40,7 @@ describe('env.js', () => {
   // FORCE_DEBUG
   test('FORCE_DEBUG type should be', () => {
     expect(e._types.PWD) // eslint-disable-line no-underscore-dangle
-      .toBe(EnvType.VAR);
+      .toBe(2);
   });
   test('FORCE_DEBUG default value should be', () => {
     expect(e._defaultValues.FORCE_DEBUG) // eslint-disable-line no-underscore-dangle

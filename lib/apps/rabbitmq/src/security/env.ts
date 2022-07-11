@@ -16,7 +16,7 @@ const env = Env.getAll([
    * You can set secret env var with Env.newSecret()
    * It will set defaultValue to "dev", you can't change this.
    * If you need to work with a real secret value, you have to put it into the host env vars
-   * /!\ KEEP IN MIND: NEVER commit a real secret value !
+   * !! KEEP IN MIND: NEVER commit a real secret value !
    */
   Env.newSecret('RABBITMQ_LOGIN'),
   Env.newSecret('RABBITMQ_PASSWORD'),

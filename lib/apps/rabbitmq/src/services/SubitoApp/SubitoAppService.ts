@@ -2,11 +2,11 @@ import { Context } from '../../consumer/Consumer';
 
 /**
  * SubitoAppService handle new messages
- * 
+ *
  * @remarks
  * Services handle the business layer
  * They can called all repositories & even other services
- * 
+ *
  * @public
  */
 class SubitoAppService {
