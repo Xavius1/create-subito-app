@@ -1,5 +1,5 @@
-import { Entity, Policy } from 'subito-graphql';
-import type { AnyObject } from 'subito-graphql';
+import { /* Entity, */ Policy } from 'subito-graphql';
+// import type { AnyObject } from 'subito-graphql';
 
 // Uncomment the next line if you need to re-map some field before returning
 // const map = { _id: 'id' }; // eslint-disable-line no-underscore-dangle

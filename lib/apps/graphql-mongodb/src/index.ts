@@ -48,14 +48,14 @@ import resolvers from './graphql/resolvers';
        * NEVER send clear app data from your endpoint.
        * If someone gains direct access to your micro services, it makes a high security breach.
        * Instead, always read the token at each micro service level.
-       * 
+       *
        * Another security best practice is to create a token that contains the name of the endpoint
        * use to generate it.
        * This way, when you read it, you can verify the endpoint use to execute requests match the
        * one use to created the token.
-       * For example, a token created through the internal endpoint should not be used through 
+       * For example, a token created through the internal endpoint should not be used through
        * the client endpoint and vice versa.
-       * 
+       *
        * It's true for all kind of token (app, viewer, etc...)
        */
       app: (req.headers[e.HEADER_APP_TOKEN]
