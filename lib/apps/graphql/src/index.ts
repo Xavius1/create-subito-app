@@ -13,7 +13,7 @@ import { debugMode, Token } from 'subito-lib';
 // import SubitoAppService from './services/SubitoApp/SubitoAppService';
 import e from './security/env';
 import Abac from './security/Abac';
-import resolvers from './graphql/resolvers/';
+import resolvers from './graphql/resolvers';
 
 (async () => {
   const server = new ApolloServer({
@@ -45,7 +45,10 @@ import resolvers from './graphql/resolvers/';
        * It's true for all kind of token (app, viewer, etc...)
        */
       app: (req.headers[e.HEADER_APP_TOKEN]
-        ? Token.read(req.headers[e.HEADER_APP_TOKEN], { endpoint: <string>req.headers[e.HEADER_ENDPOINT] })
+        ? Token.read(
+          <string>req.headers[e.HEADER_APP_TOKEN],
+          { endpoint: <string>req.headers[e.HEADER_ENDPOINT] },
+        )
         : null
       ),
       headers: req.headers,
@@ -58,7 +61,10 @@ import resolvers from './graphql/resolvers/';
        * KEEP IN MIND the token best practices written above
        */
       viewer: (req.headers.authorization
-        ? Token.read(req.headers.authorization, { endpoint: <string>req.headers[e.HEADER_ENDPOINT] })
+        ? Token.read(
+          <string>req.headers.authorization,
+          { endpoint: <string>req.headers[e.HEADER_ENDPOINT] },
+        )
         : null
       ),
       services: {

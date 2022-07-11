@@ -1,6 +1,5 @@
 import e from './env.js';
 
-  Env.newEnv('MONGODB_SUBITOAPP_CSTYPE', { defaultValue: 'Date' }),
 describe('env.js', () => {
   // MONGODB_MAIN_LINK
   test('MONGODB_MAIN_LINK default value should be', () => {
@@ -33,7 +32,7 @@ describe('env.js', () => {
       .toBe('createdAt');
   });
   // MONGODB_SUBITOAPP_CSTYPE
-  test('MONGODB_MAIN_LINK default value should be', () => {
+  test('MONGODB_SUBITOAPP_CSTYPE default value should be', () => {
     expect(e._defaultValues.MONGODB_SUBITOAPP_CSTYPE) // eslint-disable-line no-underscore-dangle
       .toBe('Date');
   });

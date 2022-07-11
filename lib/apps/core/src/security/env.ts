@@ -10,7 +10,7 @@ const env = Env.getAll([
    * You can set secret env var with Env.newSecret()
    * It will set defaultValue to "dev", you can't change this.
    * If you need to work with a real secret value, you have to put it into the host env vars
-   * /!\ KEEP IN MIND: NEVER commit a real secret value !
+   * !! KEEP IN MIND: NEVER commit a real secret value !
    */
   // Uncomment the next line if you want to use one secret auth key per service
   // Env.newSecret('SUBITOAPP_AUTH_KEY'),
