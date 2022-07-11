@@ -6,9 +6,9 @@ import Consumer from './consumer/Consumer';
 import e from './security/env';
 
 (async () => {
-  // Init gateway, we'll use it to request api
-  const client = new GraphqlClient();
-  const { success, auth } = await client.auth({ service: 'subitoapp', secret: e.SERVICE_AUTH_KEY });
+  // Connect to the GraphQL endpoint, we'll use it to request api
+  const client = new GraphqlClient({});
+  const { success } = await client.auth({ service: 'subitotype-subitoapp', secret: e.SERVICE_AUTH_KEY });
   if (!success) {
     Thrower.forbidden();
   }

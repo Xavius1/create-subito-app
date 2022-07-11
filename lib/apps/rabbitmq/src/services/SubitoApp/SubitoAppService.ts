@@ -1,3 +1,5 @@
+import { Context } from "../../consumer/Consumer";
+
 /**
  * SubitoAppService handle new messages
  * 
@@ -10,15 +12,15 @@
 class SubitoAppService {
   /**
    * Consume new messages
-   * 
+   *
    * @param msg - The new message receive from rabbitmq
    * @param args - Args defined into the command line
    * @param context - The context
-   * @returns 
-   * 
+   * @returns
+   *
    * @public
    */
-  run(msg, args, context) {
+  run(msg: unknown, args: unknown, context: Context): boolean {
     // Consume the message here
     return true;
   }

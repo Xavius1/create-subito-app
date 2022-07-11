@@ -7,6 +7,6 @@ const args = () => {
   //   type: 'int',
   //   description: 'Number of iteration by batch',
   // });
-}
+};
 
 export default args;

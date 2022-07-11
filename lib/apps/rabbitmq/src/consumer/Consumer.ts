@@ -4,16 +4,33 @@ import argv from 'argv';
 import e from '../security/env.js';
 import defineArgs from '../security/args';
 
+export type ConsumerProps = {
+  endpoint: string
+  dataSources: { [key: string]: any }
+  services: { [key: string]: any }
+  debug: boolean
+}
+
+export interface IConsumer {
+  connect(queue: string): Promise<unknown>
+  consume(): Promise<true>
+  publish(queue: string, msg: unknown): Promise<boolean | undefined>
+}
+
+export type Context = ConsumerProps & {
+  Consumer: unknown
+}
+
 /**
  * Consumer handle the interface layer
- * /!\ NEVER modify this file, put your business logic into SubitoAppService
- * 
- * @internal
+ * !! NEVER modify this file, put your business logic into SubitoAppService
+ *
+ * @public
  */
-class Consumer {
+class Consumer implements IConsumer {
   protected args: unknown;
 
-  protected context;
+  protected context: Context;
 
   protected broker: Connection | null = null;
 
@@ -21,13 +38,23 @@ class Consumer {
 
   protected queue: string = '';
 
-  constructor(context) {
-    this.args = this.readArgs(process.argv.slice(2)); // eslint-disable-lin
-    this.context = { ...context };
-    this.context.Consumer = this;
+  constructor(context: ConsumerProps) {
+    this.args = this.readArgs(process.argv.slice(2));
+    this.context = {
+      ...context,
+      Consumer: this,
+    };
   }
 
-  async connect(queue: string) {
+  /**
+   * Connect the consumer to a queue
+   *
+   * @param queue - Name of the queue
+   * @returns
+   *
+   * @public
+   */
+  async connect(queue: string): Promise<unknown> {
     this.broker = await amqp.connect({
       hostname: e.RABBITMQ_HOST,
       username: e.RABBITMQ_LOGIN,
@@ -41,7 +68,14 @@ class Consumer {
     return this;
   }
 
-  async consume() {
+  /**
+   * Start to consume a queue
+   *
+   * @returns
+   *
+   * @public
+   */
+  async consume(): Promise<true> {
     const { channel, queue } = this;
 
     channel?.consume(queue, async (msg) => {
@@ -58,7 +92,15 @@ class Consumer {
     return true;
   }
 
-  async run(msg: Message) {
+  /**
+   * Process new message
+   *
+   * @param msg - Recieved message
+   * @returns
+   *
+   * @public
+   */
+  protected async run(msg: Message) {
     const { args, context } = this;
     const { services: { SubitoApp } } = context;
     console.log('🚀 SubitoApp receives a message'); // eslint-disable-line no-console
@@ -69,11 +111,23 @@ class Consumer {
     );
   }
 
-  async publish(queue: string, msg: unknown) {
+  /**
+   * Publish a new message
+   *
+   * @param queue - Name of the queue
+   * @param msg - Message to publish
+   * @returns
+   *
+   * @public
+   */
+  async publish(queue: string, msg: unknown): Promise<boolean | undefined> {
     return this.channel?.sendToQueue(queue, Buffer.from(JSON.stringify(msg)));
   }
 
-  readArgs(args: string[]) { 
+  /**
+   * @internal
+   */
+  protected readArgs(args: string[]) {
     defineArgs();
     const { options } = argv.run(args);
     this.args = options;

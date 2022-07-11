@@ -23,7 +23,8 @@ const env = Env.getAll([
 
   /**
    * With newVar, you set vars with default value
-   * This default value will be use everywhere, even when APP_ENV is set to "staging" or "production"
+   * This default value will be use everywhere, even when APP_ENV is set to "staging"
+   * or "production"
    */
   // The queue name to consume
   Env.newVar('SUBITOAPP_QUEUE_NAME', { defaultValue: 'subito-queue' }), 
