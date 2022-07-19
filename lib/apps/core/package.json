@@ -49,6 +49,6 @@
   },
   "dependencies": {
     "graphql-request": "4.3.0",
-    "subito-lib": "0.9.0"
+    "subito-lib": "0.10.0"
   }
 }
