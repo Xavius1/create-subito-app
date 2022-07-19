@@ -1,6 +1,6 @@
 {
   "name": "create-subito-app",
-  "version": "0.9.10",
+  "version": "0.9.11",
   "description": "Create a subito microservice in one command",
   "main": "index.js",
   "scripts": {
