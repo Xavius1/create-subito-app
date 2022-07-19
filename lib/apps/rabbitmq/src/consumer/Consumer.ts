@@ -1,3 +1,7 @@
+/**
+ * Consumer handle the interface layer
+ * !! NEVER modify this file, put your business logic into SubitoAppService
+ */
 import type { Channel, Connection, Message } from 'amqplib';
 import amqp from 'amqplib';
 import argv from 'argv';
@@ -23,8 +27,6 @@ export type Context = ConsumerProps & {
 
 /**
  * Consumer handle the interface layer
- * !! NEVER modify this file, put your business logic into SubitoAppService
- *
  * @public
  */
 class Consumer implements IConsumer {
