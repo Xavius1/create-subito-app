@@ -1,4 +1,4 @@
-FROM node:16.15.1-slim as builder
+FROM node:16.16.0-slim as builder
 RUN apt-get update \
   && apt-get install -y git --no-install-recommends \
   && rm -rf /var/lib/apt/lists/* \
@@ -6,7 +6,7 @@ RUN apt-get update \
 RUN mkdir /app
 COPY ./dist /app
 
-FROM node:16.15.1-slim
+FROM node:16.16.0-slim
 LABEL author=xavius@tutanuta.com
 COPY --from=builder /app /app
 WORKDIR /app

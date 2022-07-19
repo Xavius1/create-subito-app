@@ -23,9 +23,20 @@ definitions:
           - apt-get update && apt-get install -y git
           - npm ci
           - npx test-js
-          - npx test-schema
         artifacts:
           - node_modules/**
+          - tag.txt
+          - build.txt
+          - slug.txt
+    - step: &compile
+        name: Compile
+        caches:
+          - node
+        script: 
+          - npx compile-js
+        artifacts:
+          - node_modules/**
+          - dist/**
           - tag.txt
           - build.txt
           - slug.txt
@@ -64,5 +75,22 @@ pipelines:
   default:
     - step: *audit
     - step: *test
+    - step: *compile
+  develop:
+    - step: *audit
+    - step: *test
+    - step: *compile
+    - step: *build
+    - step: *push-image-gcr
+  main:
+    - step: *audit
+    - step: *test
+    - step: *compile
+    - step: *build
+    - step: *push-image-gcr
+  master:
+    - step: *audit
+    - step: *test
+    - step: *compile
     - step: *build
     - step: *push-image-gcr

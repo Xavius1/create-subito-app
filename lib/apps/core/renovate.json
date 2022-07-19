@@ -1,0 +1,22 @@
+{
+  "extends": [
+    "config:base"
+  ],
+  "packageRules": [
+    {
+      "matchUpdateTypes": [
+        "minor",
+        "patch"
+      ],
+      "matchCurrentVersion": "!/^0/",
+      "automerge": true,
+      "automergeType": "pr",
+      "platformAutomerge": true
+    }
+  ],
+  "platformAutomerge": true,
+  "automergeType": "pr",
+  "reviewers": [
+    "Xavius1"
+  ]
+}
