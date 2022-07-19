@@ -63,7 +63,7 @@
     execSync(`mv ${projectPath}/_npmrc ${projectPath}/.npmrc`);
     // Install dependencies
     console.log('6/7 - Install dependencies');
-    execSync(`npm ci`, { cwd: projectPath });
+    execSync(`npm install`, { cwd: projectPath });
     // Init git repository
     console.log('7/7 - Init git repository');
     execSync(`git init -b main`, { cwd: projectPath });
