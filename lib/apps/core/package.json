@@ -4,8 +4,20 @@
   "description": "A subito micro service",
   "main": "./dist/app.js",
   "typings": "./dist/app.d.ts",
+  "type": "module",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "np": "npm run pre-publish && np",
+    "pre-publish": "npm run compile-js && npm run build-types && npm run build-dist",
+    "build-dist": "./node_modules/.bin/tsc -p tsconfig.dist.json",
+    "build-doc": "./node_modules/.bin/subito-build-doc",
+    "build-types": "./node_modules/.bin/subito-build-types",
+    "compile-js": "./node_modules/.bin/subito-compile-js",
+    "run-tests": "./node_modules/.bin/subito-run-tests",
+    "test": "node --experimental-vm-modules node_modules/.bin/jest",
+    "build": "./node_modules/.bin/tsc -p tsconfig.build.json",
+    "build-dev": "npm run compile-js && NODE_ENV=development node --inspect lib/index.js",
+    "dev": "nodemon --ext ts --exec \"npm run build-dev\"",
+    "start": "npm run compile-js && NODE_ENV=production node lib/index.js"
   },
   "author": "Xavius",
   "license": "EUPL-1.2",

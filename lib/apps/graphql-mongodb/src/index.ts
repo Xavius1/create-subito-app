@@ -10,9 +10,9 @@ import { buildSubgraphSchema } from '@apollo/subgraph';
 import { loadFiles } from 'graphql-import-files';
 import { debugMode, Token } from 'subito-lib';
 import { Connector as MongoDBConnector } from 'subito-connector-mongodb';
-import SubitoApps from './repositories/SubitoApp/SubitoApps';
-import e from './security/env';
-import Abac from './security/Abac';
+import SubitoApps from './repositories/SubitoApp/SubitoApps.js';
+import e from './security/env.js';
+import Abac from './security/Abac.js';
 import resolvers from './graphql/resolvers';
 // Uncomment the next line if you need a service
 // import SubitoAppService from './services/SubitoApp/SubitoAppService';

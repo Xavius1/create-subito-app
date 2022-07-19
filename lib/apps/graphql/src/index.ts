@@ -11,8 +11,8 @@ import { loadFiles } from 'graphql-import-files';
 import { debugMode, Token } from 'subito-lib';
 // Uncomment the next line if you need a service
 // import SubitoAppService from './services/SubitoApp/SubitoAppService';
-import e from './security/env';
-import Abac from './security/Abac';
+import e from './security/env.js';
+import Abac from './security/Abac.js';
 import resolvers from './graphql/resolvers';
 
 (async () => {

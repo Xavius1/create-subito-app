@@ -1,9 +1,9 @@
 import './security/open-telemetry';
 import { debugMode, GraphqlClient, Thrower } from 'subito-lib';
-import SubitoAppService from './services/SubitoApp/SubitoAppService';
-import Api from './repositories/Api/Api';
-import Consumer from './consumer/Consumer';
-import e from './security/env';
+import SubitoAppService from './services/SubitoApp/SubitoAppService.js';
+import Api from './repositories/Api/Api.js';
+import Consumer from './consumer/Consumer.js';
+import e from './security/env.js';
 
 (async () => {
   // Connect to the GraphQL endpoint, we'll use it to request api

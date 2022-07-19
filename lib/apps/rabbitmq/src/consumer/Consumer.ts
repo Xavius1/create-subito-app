@@ -6,7 +6,7 @@ import type { Channel, Connection, Message } from 'amqplib';
 import amqp from 'amqplib';
 import argv from 'argv';
 import e from '../security/env.js';
-import defineArgs from '../security/args';
+import defineArgs from '../security/args.js';
 
 export type ConsumerProps = {
   endpoint: string
