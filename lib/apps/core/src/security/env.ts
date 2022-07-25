@@ -2,7 +2,7 @@ import { Env } from 'subito-lib';
 
 /**
  * List all used vars by the app
- * 
+ *
  * @public
  */
 const env = Env.getAll([
@@ -16,7 +16,7 @@ const env = Env.getAll([
   // Env.newSecret('SUBITOAPP_AUTH_KEY'),
 
   /**
-   * Never hard-coded variable into your code
+   * !! NEVER hard-coded variable into your code
    * Instead, put it here with newSecret(), newEnv() or newVar() then set a default value
    * You can also use aliases of newVar(): newBool(), newInt(), newFloat() & newArray()
    * That way, other developers don't need to set env vars when they run your code,

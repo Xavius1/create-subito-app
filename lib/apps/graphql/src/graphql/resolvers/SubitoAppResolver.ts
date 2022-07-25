@@ -1,6 +1,6 @@
 /**
  * Resolvers handle the presentation layer
- * They can call services as repositories
+ * They can call services like repositories
  * Here we map entities fields with the graphql schema
  * Also here that we care to match the GraphQL/RelayJS conventions
  *

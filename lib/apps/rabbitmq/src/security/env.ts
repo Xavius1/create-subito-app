@@ -30,7 +30,7 @@ const env = Env.getAll([
   Env.newVar('SUBITOAPP_QUEUE_NAME', { defaultValue: 'subito-queue' }),
 
   /**
-   * Never hard-coded variable into your code
+   * !! NEVER hard-coded variable into your code
    * Instead, put it here with newSecret(), newEnv() or newVar() then set a default value
    * You can also use aliases of newVar(): newBool(), newInt(), newFloat() & newArray()
    * That way, other developers don't need to set env vars when they run your code,

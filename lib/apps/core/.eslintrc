@@ -25,7 +25,6 @@
     "node/no-process-env": "error",
     "no-secrets/no-secrets": "error"
   },
-  "ignorePatterns": ["dist/", "lib/"],
   "settings": {
     "import/resolver": {
       "typescript": {} // this loads <rootdir>/tsconfig.json to eslint

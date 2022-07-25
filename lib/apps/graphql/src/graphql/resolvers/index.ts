@@ -1,4 +1,3 @@
-import { GraphQLResolverMap } from '@apollo/subgraph/dist/schema-helper/resolverMap.js';
 import {
   DefaultScalarsResolver,
   DefaultCursorResolver,
@@ -14,7 +13,7 @@ const entities: string[] = [
   'SubitoApp',
 ];
 
-const resolvers: GraphQLResolverMap = {
+const resolvers: { [key: string]: any } = {
   ...DefaultScalarsResolver,
 
   Mutation,

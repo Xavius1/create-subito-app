@@ -1,0 +1,7 @@
+/coverage/*
+/dist/*
+/doc/*
+/etc/*
+/lib/*
+/node_modules/*
+/temp/*

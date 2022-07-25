@@ -11,7 +11,7 @@ import { /* Entity, */ Policy } from 'subito-graphql';
  */
 class SubitoAppAbac extends Policy {
   // Uncomment this function if you need to re-map fields or to do other stuff
-  // public read({ doc }: AnyObject) {
+  // public read(doc: AnyObject) {
   //   if (this.isAdmin()) {
   //     const entity = new Entity(doc, map);
   //     return entity.get();

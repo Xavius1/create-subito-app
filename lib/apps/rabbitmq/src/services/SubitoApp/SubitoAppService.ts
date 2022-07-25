@@ -1,4 +1,4 @@
-import { Context } from '../../consumer/Consumer.js';
+import { Service } from 'subito-lib'; 
 
 /**
  * SubitoAppService handle new messages
@@ -9,18 +9,16 @@ import { Context } from '../../consumer/Consumer.js';
  *
  * @public
  */
-class SubitoAppService {
+class SubitoAppService extends Service {
   /**
    * Consume new messages
    *
    * @param msg - The new message receive from rabbitmq
-   * @param args - Args defined into the command line
-   * @param context - The context
    * @returns
    *
    * @public
    */
-  run(msg: unknown, args: unknown, context: Context): boolean {
+  run(msg: unknown): boolean {
     // Consume the message here
     return true;
   }

@@ -1,8 +1,9 @@
-import './security/open-telemetry';
-import { debugMode, GraphqlClient, Thrower } from 'subito-lib';
+import './security/open-telemetry.js';
+import { debugMode, GraphqlClient, Thrower, Subito } from 'subito-lib';
+import { Connector, Repository } from 'subito-connector-rabbitmq';
 import SubitoAppService from './services/SubitoApp/SubitoAppService.js';
-import Api from './repositories/Api/Api.js';
-import Consumer from './consumer/Consumer.js';
+import Apis from './repositories/Api/Apis.js';
+import options from './security/options.js';
 import e from './security/env.js';
 
 (async () => {
@@ -13,21 +14,33 @@ import e from './security/env.js';
     Thrower.forbidden();
   }
 
-  // Create consumer
-  const consumer = new Consumer({
-    endpoint: e.INTERNAL_GRAPHQL_ENDPOINT,
+  // Connect to the RabbitMQ endpoint needed by the consumer
+  const rmq = new Connector({
+    hostname: e.RABBITMQ_HOST,
+    username: e.RABBITMQ_LOGIN,
+    password: e.RABBITMQ_PASSWORD,
+  });
+  await rmq.connect();
+
+  // We handle the interface layer with a new Subito App
+  const app = new Subito({
     dataSources: {
-      Api: new Api(client),
+      // Apis handles all requests to the GraphQL endpoint
+      Apis: new Apis(client),
+      // SubitoApps publishes & consumes to & from a RabbitMQ queue
+      SubitoApps: new Repository(await rmq.channel(e.BOT_QUEUE_NAME)),
     },
     services: {
+      // SubitoApp is the entrypoint of the business layer
       SubitoApp: new SubitoAppService(),
     },
     debug: debugMode(),
-  });
+  }, options);
 
-  // Connect it to rabbitmq, you have to pass the queue name as param
-  await consumer.connect(e.SUBITOAPP_QUEUE_NAME);
-
-  // Then consume
-  consumer.consume();
+  // Start to consume the queue
+  const {
+    dataSources: { SubitoApps },
+    services: { SubitoApp },
+  } = app.context;
+  SubitoApps.consume(SubitoApp.run);
 })();

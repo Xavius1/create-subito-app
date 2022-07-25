@@ -3,7 +3,7 @@
  *
  * @packageDocumentation
  */
-import './security/open-telemetry';
+import './security/open-telemetry.js';
 import { ApolloServer } from 'apollo-server';
 import { ApolloServerPluginUsageReportingDisabled } from 'apollo-server-core';
 import { buildSubgraphSchema } from '@apollo/subgraph';

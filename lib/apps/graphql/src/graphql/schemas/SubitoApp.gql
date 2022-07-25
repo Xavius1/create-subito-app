@@ -111,7 +111,7 @@ type SubitoAppSubitoAppQuery {
     before: String, 
     filters: SubitoAppSubitoAppFilters
   ): SubitoAppSubitoAppCursorPaginator
-  # getAll(): [SubitoAppSubitoApp]
+  # getAll(sort: String, order: OrderOperator): [SubitoAppSubitoApp]
 }
 
 """

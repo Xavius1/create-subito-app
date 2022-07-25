@@ -3,6 +3,6 @@
   "version": "0.1.0",
   "description": "A subito micro service with graphql interface & mongodb repository",
   "dependencies": {
-    "subito-connector-mongodb": "0.5.0"
+    "subito-connector-mongodb": "0.7.5"
   }
 }

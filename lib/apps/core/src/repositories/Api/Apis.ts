@@ -8,7 +8,7 @@ import type { IGraphqlClient } from 'subito-lib';
 import QUERY_SAMPLE from './queries/QUERY_SAMPLE.js';
 import MUTATION_SAMPLE from './queries/MUTATION_SAMPLE.js';
 
-class Api {
+class Apis {
   protected client: IGraphqlClient;
 
   constructor(client: IGraphqlClient) {
@@ -31,4 +31,4 @@ class Api {
   }
 }
 
-export default Api;
+export default Apis;
