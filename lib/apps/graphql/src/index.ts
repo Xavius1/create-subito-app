@@ -76,6 +76,6 @@ import resolvers from './graphql/resolvers';
   });
 
   server.listen(4001).then(({ url }) => {
-    console.log(`SubitoApp server ready at ${url}`); // eslint-disable-line no-console
+    console.log(`SubitoApp api ready at ${url}`); // eslint-disable-line no-console
   });
 })();

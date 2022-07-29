@@ -1,5 +1,7 @@
 import './security/open-telemetry.js';
-import { debugMode, GraphqlClient, Thrower, Subito } from 'subito-lib';
+import {
+  debugMode, GraphqlClient, Thrower, Subito,
+} from 'subito-lib';
 import { Connector, Repository } from 'subito-connector-rabbitmq';
 import SubitoAppService from './services/SubitoApp/SubitoAppService.js';
 import Apis from './repositories/Api/Apis.js';
@@ -42,5 +44,7 @@ import e from './security/env.js';
     dataSources: { SubitoApps },
     services: { SubitoApp },
   } = app.context;
-  SubitoApps.consume(SubitoApp.run);
+  SubitoApps.consume(
+    SubitoApp.run.bind(SubitoApp)
+  );
 })();

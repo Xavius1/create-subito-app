@@ -18,7 +18,7 @@ class SubitoAppService extends Service {
    *
    * @public
    */
-  run(msg: unknown): boolean {
+  run(/* msg: unknown */): boolean {
     // Consume the message here
     return true;
   }

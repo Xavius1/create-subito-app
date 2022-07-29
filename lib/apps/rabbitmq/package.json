@@ -4,7 +4,7 @@
   "dependencies": {
     "amqplib": "0.10.0",
     "argv": "0.0.2",
-    "subito-connector-rabbitmq": "0.2.1"
+    "subito-connector-rabbitmq": "0.4.1"
   },
   "devDependencies": {
     "@types/amqplib": "0.8.2",
