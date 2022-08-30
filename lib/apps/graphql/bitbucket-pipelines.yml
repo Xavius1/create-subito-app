@@ -1,14 +1,12 @@
 options:
   docker: true
 
-image: node:16.16.0-slim
+image: node:16.17.0-slim
 
 definitions:
   steps:    
     - step: &audit
         name: Audits
-#        caches:
- #         - node
         script:
           - apt-get update && apt-get install -y git
           - npm ci
@@ -17,13 +15,11 @@ definitions:
           - node_modules/**
     - step: &test
         name: Tests
-        caches:
-          - node
         script:
           - apt-get update && apt-get install -y git
           - npm ci
-          - npx test-js
-          - npx test-schema
+          - npx subito-test-js
+          - npx subito-test-schema
         artifacts:
           - node_modules/**
           - tag.txt
@@ -31,15 +27,31 @@ definitions:
           - slug.txt
     - step: &build
         name: Builds
-        caches:
-          - node
         script: 
-          - npx compile-js
-          - npx build-types
-          - npx build-doc
-          - npx build-dist
-          - npx build-image
+          - apt-get update && apt-get install -y git
+          - npm ci
+          - npx subito-compile-js
+          - npx subito-build-types
+          - npx subito-build-doc
+          - npx subito-build-dist # Compile js to dist folder
+          - npm run copy-gql # Copy gql files to dist folder
+          - npx subito-build-modules # Install production node modules to dist folder & do some optims
+          - npx subito-build-image # Build docker image
         artifacts:
+          - tmp-image.docker
+          - node_modules/**
+          - tag.txt
+          - build.txt
+          - slug.txt
+          - dist/**
+          - doc/**
+    - step: &push-schema
+        name: Push schema to AS registry
+        script: 
+          - apt-get update && apt-get install -y git
+          - npx subito-push-schema
+        artifacts:
+          - tmp-image.docker
           - node_modules/**
           - tag.txt
           - build.txt
@@ -49,20 +61,42 @@ definitions:
     - step: &push-image-gcr
         name: Push image to GCR
         image: google/cloud-sdk:alpine
-        caches:
-          - node
         script:
-          - npx push-image gcr
+          - apt-get update && apt-get install -y git
+          # We don't use npx command here because node is not install on google/cloud-sdk:alpine
+          - bash ./node_modules/subito-ci/lib/push-image-gcr
     - step: &push-image
         name: Push image to registry
         image: google/cloud-sdk:alpine
-        caches:
-          - node
         script:
-          - npx push-image
+          - apt-get update && apt-get install -y git
+          - npx subito-push-image
 pipelines:
   default:
-    - step: *audit
-    - step: *test
-    - step: *build
-    - step: *push-image-gcr
+      - step: *audit
+      - step: *test
+  branches:
+    feat:
+      - step: *audit
+      - step: *test
+      - step: *build
+      - step: *push-schema
+      - step: *push-image-gcr
+    develop:
+      - step: *audit
+      - step: *test
+      - step: *build
+      - step: *push-schema
+      - step: *push-image-gcr
+    master:
+      - step: *audit
+      - step: *test
+      - step: *build
+      - step: *push-schema
+      - step: *push-image-gcr
+    main:
+      # - step: *audit
+      # - step: *test
+      - step: *build
+      # - step: *push-schema
+      - step: *push-image-gcr
