@@ -2,11 +2,17 @@
   "name": "subito-app",
   "version": "0.1.0",
   "description": "A subito micro service with graphql interface",
+  "scripts": {
+    "build-dev": "npm run compile-js && npm run copy-gql && NODE_ENV=development node --inspect lib/index.js",
+  },
   "dependencies": {
     "@apollo/subgraph": "2.0.5",
     "apollo-server": "3.9.0",
     "apollo-server-core": "3.9.0",
     "graphql-import-files": "1.0.18",
     "subito-graphql": "0.12.1"
+  },
+  "devDependencies": {
+    "copyfiles": "2.4.1"
   }
 }
