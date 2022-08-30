@@ -1,4 +1,4 @@
-import { Service } from 'subito-lib'; 
+import { Service } from 'subito-lib';
 
 /**
  * SubitoAppService handle new messages
