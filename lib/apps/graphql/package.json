@@ -5,14 +5,14 @@
   "scripts": {
     "copy-gql-dev": "rm -f lib/graphql/schemas/*.gql && copyfiles --error --up 1 src/graphql/schemas/*.gql lib",
     "copy-gql": "rm -f dist/graphql/schemas/*.gql && copyfiles --error --up 1 src/graphql/schemas/*.gql dist",
-    "build-dev": "npm run compile-js && npm run copy-gql-dev && NODE_ENV=development node --inspect lib/index.js",
+    "build-dev": "npm run compile-js && npm run copy-gql-dev && NODE_ENV=development node --inspect lib/index.js"
   },
   "dependencies": {
     "@apollo/subgraph": "2.0.5",
     "apollo-server": "3.9.0",
     "apollo-server-core": "3.9.0",
     "graphql-import-files": "1.0.18",
-    "subito-graphql": "0.12.1"
+    "subito-graphql": "0.13.1"
   },
   "devDependencies": {
     "copyfiles": "2.4.1"
