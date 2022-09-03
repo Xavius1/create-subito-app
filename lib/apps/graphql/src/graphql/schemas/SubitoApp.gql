@@ -61,7 +61,7 @@ Description: It uses the cursor paginator pattern
 """
 type SubitoAppSubitoAppCursorPaginator implements CursorPaginator {
   edges: [SubitoAppSubitoAppEdge]
-  pageInfo: SubitoAppSubitoAppPageInfo!
+  pageInfo: SubitoAppSubitoAppPageInfo
 }
 
 """

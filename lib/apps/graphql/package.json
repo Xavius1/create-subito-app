@@ -3,8 +3,8 @@
   "version": "0.1.0",
   "description": "A subito micro service with graphql interface",
   "scripts": {
-    "copy-gql-dev": "copyfiles --error --up 1 src/graphql/schemas/*.gql lib",
-    "copy-gql": "copyfiles --error --up 1 src/graphql/schemas/*.gql dist",
+    "copy-gql-dev": "rm -f lib/graphql/schemas/*.gql && copyfiles --error --up 1 src/graphql/schemas/*.gql lib",
+    "copy-gql": "rm -f dist/graphql/schemas/*.gql && copyfiles --error --up 1 src/graphql/schemas/*.gql dist",
     "build-dev": "npm run compile-js && npm run copy-gql-dev && NODE_ENV=development node --inspect lib/index.js",
   },
   "dependencies": {

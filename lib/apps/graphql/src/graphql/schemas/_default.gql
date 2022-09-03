@@ -136,7 +136,7 @@ interface PageInfo {
 
 interface CursorPaginator {
   edges: [Edge]
-  pageInfo: PageInfo!
+  pageInfo: PageInfo
 }
 
 interface Edge {

@@ -95,8 +95,8 @@ pipelines:
       - step: *push-schema
       - step: *push-image-gcr
     main:
-      # - step: *audit
-      # - step: *test
+      - step: *audit
+      - step: *test
       - step: *build
-      # - step: *push-schema
+      - step: *push-schema
       - step: *push-image-gcr
