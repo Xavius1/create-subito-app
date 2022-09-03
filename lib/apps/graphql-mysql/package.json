@@ -1,0 +1,8 @@
+{
+  "name": "subito-app",
+  "version": "0.1.0",
+  "description": "A subito micro service with graphql interface & mysql repository",
+  "dependencies": {
+    "subito-connector-mysql": "0.1.0"
+  }
+}
