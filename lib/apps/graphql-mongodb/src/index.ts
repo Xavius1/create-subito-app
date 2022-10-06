@@ -13,7 +13,7 @@ import { Connector as MongoDBConnector } from 'subito-connector-mongodb';
 import SubitoApps from './repositories/SubitoApp/SubitoApps.js';
 import e from './security/env.js';
 import Abac from './security/Abac.js';
-import resolvers from './graphql/resolvers';
+import resolvers from './graphql/resolvers/index.js';
 // Uncomment the next line if you need a service
 // import SubitoAppService from './services/SubitoApp/SubitoAppService';
 
@@ -29,7 +29,7 @@ import resolvers from './graphql/resolvers';
 
   const server = new ApolloServer({
     schema: buildSubgraphSchema([{
-      typeDefs: loadFiles('./graphql/schemas/*.gql'),
+      typeDefs: loadFiles(`${e.PWD}/graphql/schemas/*.gql`),
       resolvers,
     }]),
     plugins: [

@@ -3,16 +3,17 @@
   "version": "0.1.0",
   "description": "A subito micro service with graphql interface",
   "scripts": {
-    "copy-gql-dev": "rm -f lib/graphql/schemas/*.gql && copyfiles --error --up 1 src/graphql/schemas/*.gql lib",
-    "copy-gql": "rm -f dist/graphql/schemas/*.gql && copyfiles --error --up 1 src/graphql/schemas/*.gql dist",
-    "build-dev": "npm run compile-js && npm run copy-gql-dev && NODE_ENV=development node --inspect lib/index.js"
+    "build-dev": "npm run compile-js && npm run copy-gql-dev && NODE_ENV=development PWD=./lib node --inspect lib/index.js",
+    "dev": "nodemon --ext ts,gql --exec \"npm run build-dev\"",
+    "copy-gql-dev": "copyfiles --error --up 1 src/graphql/schemas/*.gql lib",
+    "copy-gql": "copyfiles --error --up 1 src/graphql/schemas/*.gql dist"
   },
   "dependencies": {
     "@apollo/subgraph": "2.0.5",
     "apollo-server": "3.9.0",
     "apollo-server-core": "3.9.0",
     "graphql-import-files": "1.0.18",
-    "subito-graphql": "0.13.1"
+    "subito-graphql": "0.17.4"
   },
   "devDependencies": {
     "copyfiles": "2.4.1"

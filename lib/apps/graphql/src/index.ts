@@ -13,12 +13,12 @@ import { debugMode, Token } from 'subito-lib';
 // import SubitoAppService from './services/SubitoApp/SubitoAppService';
 import e from './security/env.js';
 import Abac from './security/Abac.js';
-import resolvers from './graphql/resolvers';
+import resolvers from './graphql/resolvers/index.js';
 
 (async () => {
   const server = new ApolloServer({
     schema: buildSubgraphSchema([{
-      typeDefs: loadFiles('./graphql/schemas/*.gql'),
+      typeDefs: loadFiles(`${e.PWD}/graphql/schemas/*.gql`),
       resolvers,
     }]),
     plugins: [

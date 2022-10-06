@@ -35,7 +35,7 @@ input CreateSubitoAppSubitoAppInput {
 """
 Update Input (SubitoAppSubitoApp)
 """
-input UpdateSubitoAppSubitoAppInput implements UpdateInput {
+input UpdateSubitoAppSubitoAppInput {
   id: ID!
   values: UpdateSubitoAppSubitoAppValuesInput
 }
@@ -50,7 +50,7 @@ input UpdateSubitoAppSubitoAppValuesInput {
 """
 Delete Input (SubitoAppSubitoApp)
 """
-input DeleteSubitoAppSubitoAppInput implements DeleteInput {
+input DeleteSubitoAppSubitoAppInput {
   id: ID!
 }
 
@@ -59,7 +59,7 @@ Dependency (CursorPaginator)
 Used by: Query
 Description: It uses the cursor paginator pattern
 """
-type SubitoAppSubitoAppCursorPaginator implements CursorPaginator {
+type SubitoAppSubitoAppCursorPaginator {
   edges: [SubitoAppSubitoAppEdge]
   pageInfo: SubitoAppSubitoAppPageInfo
 }
@@ -93,7 +93,7 @@ Dependency (Filters)
 Used by: Query
 Description: Fields that can be used to find specifics docs
 """
-input SubitoAppSubitoAppFilters implements QueryFilters {
+input SubitoAppSubitoAppFilters {
   id: ID
   withDeleted: Boolean
 }

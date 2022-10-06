@@ -30,7 +30,7 @@ import e from './security/env.js';
       // Apis handles all requests to the GraphQL endpoint
       Apis: new Apis(client),
       // SubitoApps publishes & consumes to & from a RabbitMQ queue
-      SubitoApps: new Repository(await rmq.channel(e.BOT_QUEUE_NAME)),
+      SubitoApps: new Repository(await rmq.channel(e.SUBITOAPP_QUEUE_NAME)),
     },
     services: {
       // SubitoApp is the entrypoint of the business layer
