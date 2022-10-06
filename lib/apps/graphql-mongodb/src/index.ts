@@ -23,7 +23,7 @@ import resolvers from './graphql/resolvers/index.js';
     e.MONGODB_MAIN_NAME,
     {
       authSource: e.MONGODB_MAIN_AUTH,
-      replicatSet: e.MONGODB_MAIN_REPLICASET,
+      // replicatSet: e.MONGODB_MAIN_REPLICASET,
     },
   ).connect();
 
