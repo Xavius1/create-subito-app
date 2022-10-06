@@ -8,12 +8,12 @@
  * returning data
  * NEVER FORGET to call the security layer, if not your API will be at VERY HIGH risks !
  */
-// Uncomment this code if you need a custom resolver for your entity
-// If so, don't forget to add it in your customs resolvers into index.ts file
-// import { DefaultEntityResolver } from 'subito-graphql';
+// If you need a custom resolver for your entity, 
+// don't forget to add it in your customs resolvers into index.ts file
+import { DefaultEntityResolver } from 'subito-graphql';
 
-// const SubitoAppResolver = {
-//   ...DefaultEntityResolver,
-// };
+const SubitoAppResolver = {
+  ...DefaultEntityResolver,
+};
 
-// export default SubitoAppResolver;
+export default SubitoAppResolver;
