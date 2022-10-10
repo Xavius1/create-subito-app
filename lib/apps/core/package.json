@@ -17,12 +17,19 @@
     "build": "./node_modules/.bin/tsc -p tsconfig.build.json",
     "build-dev": "npm run compile-js && NODE_ENV=development node --inspect lib/index.js",
     "dev": "nodemon --ext ts --exec \"npm run build-dev\"",
-    "start": "npm run compile-js && NODE_ENV=production node lib/index.js"
+    "start": "npm run compile-js && NODE_ENV=production node lib/index.js",
+    "prepare": "husky install"
   },
   "bugs": {
     "url": "https://github.com/Xavius1/create-subito-app/issues"
   },
   "homepage": "https://github.com/Xavius1/create-subito-app#readme",
+  "lint-staged": {
+    "*.ts": [
+      "./node_modules/.bin/eslint . --fix",
+      "node --experimental-vm-modules node_modules/.bin/jest --config=./jest.config.cjs --bail --coveragePathIgnorePatterns=/node_modules/ --coveragePathIgnorePatterns=/__mocks__/ --findRelatedTests --passWithNoTests"
+    ]
+  },
   "devDependencies": {
     "@tsconfig/node16": "1.0.2",
     "@types/jest": "27.4.0",
@@ -37,6 +44,7 @@
     "eslint-plugin-no-secrets": "0.8.9",
     "eslint-plugin-node": "11.1.0",
     "eslint-plugin-tsdoc": "0.2.14",
+    "husky": "8.0.1",
     "jest": "27.4.7",
     "lint-staged": "12.3.3",
     "nodemon": "2.0.19",

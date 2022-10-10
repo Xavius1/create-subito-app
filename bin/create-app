@@ -67,6 +67,7 @@
     // Init git repository
     console.log('7/7 - Init git repository');
     execSync(`git init -b main`, { cwd: projectPath });
+    execSync(`npx husky install`, { cwd: projectPath });
     // End
     console.log('Your subito app is ready.')
     console.log('')
