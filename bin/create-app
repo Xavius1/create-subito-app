@@ -37,14 +37,14 @@
     console.log('Starting...')
     // Copy core files
     console.log('1/7 - Copy core files');
-    execSync(`cp -R ${corePath}/ ${projectPath}`);
+    execSync(`cp -Rp ${corePath}/ ${projectPath}`);
     // Copy app
     console.log('2/7 - Copy subito app');
-    execSync(`cp -R ${appPath}/ ${projectPath}`);
+    execSync(`cp -Rp ${appPath}/ ${projectPath}`);
     // Copy variant
     if (variantPath) {
       console.log('2.5/7 - Copy subito app variant');
-      execSync(`cp -R ${variantPath}/ ${projectPath}`);
+      execSync(`cp -Rp ${variantPath}/ ${projectPath}`);
     }
     // Get all possible formatted names
     console.log('3/7 - Define var names');
