@@ -1,4 +1,4 @@
-import './security/open-telemetry.js.js';
+import './security/open-telemetry.js';
 import cron from 'node-cron';
 import {
   debugMode, GraphqlClient, Thrower, Subito,
