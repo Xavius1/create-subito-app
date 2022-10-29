@@ -40,14 +40,11 @@ const run = async () => {
     debug: debugMode(),
   }, options);
 
-  // Start to consume the queue
+  // Run the service
   const {
-    dataSources: { SubitoApps },
     services: { SubitoApp },
   } = app.context;
-  SubitoApps.consume(
-    SubitoApp.run.bind(SubitoApp)
-  );
+  SubitoApp.run(SubitoApp);
 };
 
 const args = process.argv.slice(2);
