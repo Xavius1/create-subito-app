@@ -36,37 +36,39 @@
   try {
     console.log('Starting...')
     // Copy core files
-    console.log('1/7 - Copy core files');
+    console.log('1/8 - Copy core files');
     execSync(`cp -Rp ${corePath}/ ${projectPath}`);
     // Copy app
-    console.log('2/7 - Copy subito app');
+    console.log('2/8 - Copy subito app');
     execSync(`cp -Rp ${appPath}/ ${projectPath}`);
     // Copy variant
     if (variantPath) {
-      console.log('2.5/7 - Copy subito app variant');
+      console.log('2.5/8 - Copy subito app variant');
       execSync(`cp -Rp ${variantPath}/ ${projectPath}`);
     }
     // Get all possible formatted names
-    console.log('3/7 - Define var names');
+    console.log('3/8 - Define var names');
     const getNames = require(`${helperDir}/getNames.js`);
     // Merge packages files
-    console.log('4/7 - Prepare dependencies');
+    console.log('4/8 - Prepare dependencies');
     const copyPackages = require(`${helperDir}/copyPackages.js`);
     copyPackages(appPath, variantPath, corePath, projectPath);
     // Change names aliases into folders & files name & content
-    console.log('5/7 - Replace aliases');
+    console.log('5/8 - Replace aliases');
     const setAlias = require(`${helperDir}/setAlias.js`);
     const names = getNames(repoName, appType);
     setAlias(names, projectPath);
     // Rename specials files
     execSync(`mv ${projectPath}/_gitignore ${projectPath}/.gitignore`);
     execSync(`mv ${projectPath}/_npmrc ${projectPath}/.npmrc`);
+    // Init git repository
+    console.log('6/8 - Init git repository');
+    execSync(`git init -b main`, { cwd: projectPath });
     // Install dependencies
-    console.log('6/7 - Install dependencies');
+    console.log('7/8 - Install dependencies');
     execSync(`npm install`, { cwd: projectPath });
     // Init git repository
-    console.log('7/7 - Init git repository');
-    execSync(`git init -b main`, { cwd: projectPath });
+    console.log('8/8 - Configure husky');
     execSync(`npx husky install`, { cwd: projectPath });
     // End
     console.log('Your subito app is ready.')
