@@ -1,0 +1,12 @@
+{
+  "name": "subito-app",
+  "description": "A subito micro service with job interface",
+  "dependencies": {
+    "argv": "0.0.2",
+    "node-cron": "3.0.2"
+  },
+  "devDependencies": {
+    "@types/argv": "0.0.5",
+    "@types/node": "18.11.7"
+  }
+}
