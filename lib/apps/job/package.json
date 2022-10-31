@@ -1,6 +1,9 @@
 {
   "name": "subito-app",
   "description": "A subito micro service with job interface",
+  "scripts": {
+    "build-dev": "npm run compile-js && NODE_ENV=development node --inspect lib/index.js --now"
+  },
   "dependencies": {
     "argv": "0.0.2",
     "node-cron": "3.0.2"
