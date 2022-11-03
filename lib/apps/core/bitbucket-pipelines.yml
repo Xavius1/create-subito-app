@@ -22,7 +22,7 @@ definitions:
         script:
           - apt-get update && apt-get install -y git
           - npm ci
-          - npx test-js
+          - npx subito-test-js
         artifacts:
           - node_modules/**
           - tag.txt
@@ -33,7 +33,7 @@ definitions:
         caches:
           - node
         script: 
-          - npx compile-js
+          - npx subito-compile-js
         artifacts:
           - node_modules/**
           - dist/**
@@ -45,12 +45,13 @@ definitions:
         caches:
           - node
         script: 
-          - npx compile-js
-          - npx build-types
-          - npx build-doc
-          - npx build-dist
-          - npx build-image
+          - npx subito-compile-js
+          - npx subito-build-types
+          - npx subito-build-doc
+          - npx subito-build-dist
+          - npx subito-build-image
         artifacts:
+          - tmp-image.docker
           - node_modules/**
           - tag.txt
           - build.txt
@@ -63,34 +64,35 @@ definitions:
         caches:
           - node
         script:
-          - npx push-image gcr
+          - npx subito-push-image gcr
     - step: &push-image
         name: Push image to registry
         image: google/cloud-sdk:alpine
         caches:
           - node
         script:
-          - npx push-image
+          - npx subito-push-image
 pipelines:
   default:
     - step: *audit
     - step: *test
     - step: *compile
-  develop:
-    - step: *audit
-    - step: *test
-    - step: *compile
-    - step: *build
-    - step: *push-image-gcr
-  main:
-    - step: *audit
-    - step: *test
-    - step: *compile
-    - step: *build
-    - step: *push-image-gcr
-  master:
-    - step: *audit
-    - step: *test
-    - step: *compile
-    - step: *build
-    - step: *push-image-gcr
+  branches:
+    develop:
+      - step: *audit
+      - step: *test
+      - step: *compile
+      - step: *build
+      - step: *push-image-gcr
+    main:
+      - step: *audit
+      - step: *test
+      - step: *compile
+      - step: *build
+      - step: *push-image-gcr
+    master:
+      - step: *audit
+      - step: *test
+      - step: *compile
+      - step: *build
+      - step: *push-image-gcr

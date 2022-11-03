@@ -70,7 +70,7 @@ definitions:
         image: google/cloud-sdk:alpine
         script:
           - apt-get update && apt-get install -y git
-          - npx subito-push-image
+          - npx ./node_modules/subito-ci/lib/subito-push-image
 pipelines:
   default:
       - step: *audit
