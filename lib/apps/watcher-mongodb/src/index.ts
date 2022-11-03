@@ -24,7 +24,7 @@ import Watcher from './watcher/Watcher.js';
         authSource: e.MONGODB_MAIN_AUTH,
         // replicatSet: e.MONGODB_MAIN_REPLICASET,
       },
-      ).connect(),
+    ).connect(),
     // Connect to the GraphQL endpoint, we'll use it to request api
     client.auth({ service: 'subitotype-subitoapp', secret: e.SERVICE_AUTH_KEY })
   ];

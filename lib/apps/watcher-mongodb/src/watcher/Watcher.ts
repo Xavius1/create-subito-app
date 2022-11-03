@@ -1,31 +1,44 @@
+import { Document } from 'subito-connector-mongodb';
+import { Context } from 'subito-lib';
+
 export type WatcherOptions = {
   fullDocument: string
   resumeAfter?: string
 }
 
+export type RunInput = {
+  context: Context
+}
+
+export type WatcherInput = {
+  lastStream?: Document
+  context: Context
+}
+
 class Watcher {
-  streamRef: string | null;
   options: WatcherOptions;
+
+  context: Context;
+
   stream: any;
 
-  constructor({ lastStream, context }) {
-    this.streamRef = context.streamRef;
-    const { dataSources: { SubitoApp } } = context;
+  constructor({ lastStream, context }: WatcherInput) {
+    this.context = context;
     this.options = {
       fullDocument: 'updateLookup',
-      resumeAfter: lastStream.streamId || undefined
+      resumeAfter: lastStream.streamId || undefined,
     };
-    this.watch(context);
+    this.watch();
   }
 
-  static async run({ context }): Promise<Watcher> {
-    const { dataSources: { Watcher } } = context;
-    const lastStream = await Watcher.getLastStream();
-    return new Watcher({ lastStream, context })
+  static async run({ context }: RunInput): Promise<Watcher> {
+    const { dataSources: { Watchers } } = context;
+    const lastStream = await Watchers.getLastStream();
+    return new Watcher({ lastStream, context });
   }
 
-  watch(context) {
-    const { dataSources: { SubitoApps, Watcher } } = context;
+  watch() {
+    const { dataSources: { SubitoApps, Watchers } } = this.context;
     this.stream = SubitoApps.collection.watch(
       [
         {
@@ -34,21 +47,19 @@ class Watcher {
           },
         },
       ],
-      this.options
+      this.options,
     );
-    this.stream.on('change', async (data) => {
-      Watcher.setCurrentStream(this.stream.resumeToken);
-      this.onChange(data, context);
+    this.stream.on('change', async (data: any) => {
+      Watchers.setCurrentStream(this.stream.resumeToken);
+      this.onChange(data);
     });
   }
 
-  onChange(data, context) {
+  onChange(data: any) {
+    const { context } = this;
     const { services: { SubitoApp } } = context;
 
-    return SubitoApp.run(
-      data,
-      context,
-    );
+    return SubitoApp.run(data);
   }
 }
 
