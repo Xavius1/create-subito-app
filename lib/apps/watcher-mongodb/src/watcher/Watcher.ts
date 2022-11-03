@@ -26,7 +26,7 @@ class Watcher {
     this.context = context;
     this.options = {
       fullDocument: 'updateLookup',
-      resumeAfter: lastStream.streamId || undefined,
+      resumeAfter: lastStream?.streamId || undefined,
     };
     this.watch();
   }

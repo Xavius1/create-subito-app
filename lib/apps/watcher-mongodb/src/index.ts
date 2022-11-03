@@ -26,10 +26,10 @@ import Watcher from './watcher/Watcher.js';
       },
     ).connect(),
     // Connect to the GraphQL endpoint, we'll use it to request api
-    client.auth({ service: 'subitotype-subitoapp', secret: e.SERVICE_AUTH_KEY })
+    client.auth({ service: 'subitotype-subitoapp', secret: e.SERVICE_AUTH_KEY }),
   ];
 
-  const [ db, { success }] = await Promise.all(connections);
+  const [db, { success }] = await Promise.all(connections);
   if (!success) {
     Thrower.forbidden();
   }

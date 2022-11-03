@@ -4,14 +4,14 @@
  * All queries are done inside repositories then called via methods with params
  * !! NEVER write queries outside of a repository
  */
-import { Repository } from 'subito-connector-mongodb';
+import { Collection, Repository } from 'subito-connector-mongodb';
 // Uncomment the next line if you use env vars
 // import e from '../../security/env';
 
 class Watchers extends Repository {
   private watcherName: string;
 
-  constructor(collection, watcherName) {
+  constructor(collection: Collection, watcherName: string) {
     super(collection);
     this.watcherName = watcherName;
   }
@@ -20,7 +20,7 @@ class Watchers extends Repository {
     return this.collection.findOne({ ref: this.watcherName });
   }
 
-  async setCurrentStream(id) {
+  async setCurrentStream(id: string) {
     return this.collection.updateOne(
       { ref: this.watcherName },
       {
