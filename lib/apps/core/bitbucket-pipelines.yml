@@ -64,14 +64,18 @@ definitions:
         caches:
           - node
         script:
-          - npx subito-push-image gcr
+          - apt-get update && apt-get install -y git
+          # We don't use npx command here because node is not install on google/cloud-sdk:alpine
+          - bash ./node_modules/subito-ci/lib/push-image-gcr
     - step: &push-image
         name: Push image to registry
         image: google/cloud-sdk:alpine
         caches:
           - node
         script:
-          - npx subito-push-image
+          - apt-get update && apt-get install -y git
+          # We don't use npx command here because node is not install on google/cloud-sdk:alpine
+          - bash ./node_modules/subito-ci/lib/push-image
 pipelines:
   default:
     - step: *audit
