@@ -24,7 +24,7 @@ describe('env.js', () => {
   // MONGODB_SUBITOAPP_NAME
   test('MONGODB_SUBITOAPP_NAME default value should be', () => {
     expect(e._defaultValues.MONGODB_SUBITOAPP_NAME) // eslint-disable-line no-underscore-dangle
-      .toBe('createdAt');
+      .toBe('subitoapp');
   });
   // MONGODB_SUBITOAPP_CURSOR
   test('MONGODB_SUBITOAPP_CURSOR default value should be', () => {
