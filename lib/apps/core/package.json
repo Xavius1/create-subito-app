@@ -16,7 +16,7 @@
     "test": "node --experimental-vm-modules node_modules/.bin/jest",
     "build": "./node_modules/.bin/tsc -p tsconfig.build.json",
     "build-dev": "npm run compile-js && NODE_ENV=development node --inspect lib/index.js",
-    "dev": "nodemon --ext ts --exec \"npm run build-dev\"",
+    "dev": "nodemon --delay 500ms --ext ts --exec \"npm run build-dev\"",
     "start": "npm run compile-js && NODE_ENV=production node lib/index.js",
     "prepare": "husky install"
   },
@@ -26,7 +26,7 @@
   "homepage": "https://github.com/Xavius1/create-subito-app#readme",
   "lint-staged": {
     "*.ts": [
-      "./node_modules/.bin/eslint . --fix",
+      "./node_modules/.bin/eslint ./src --fix",
       "node --experimental-vm-modules node_modules/.bin/jest --config=./jest.config.cjs --bail --coveragePathIgnorePatterns=/node_modules/ --coveragePathIgnorePatterns=/__mocks__/ --findRelatedTests --passWithNoTests"
     ]
   },
