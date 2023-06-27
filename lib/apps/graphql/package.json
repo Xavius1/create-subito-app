@@ -4,7 +4,7 @@
   "description": "A subito micro service with graphql interface",
   "scripts": {
     "build-dev": "npm run compile-js && npm run copy-gql-dev && NODE_ENV=development PWD=./lib node --inspect lib/index.js",
-    "dev": "nodemon --ext ts,gql --exec \"npm run build-dev\"",
+    "dev": "nodemon --delay 500ms --ext ts,gql --exec \"npm run build-dev\"",
     "copy-gql-dev": "copyfiles --error --up 1 src/graphql/schemas/*.gql lib",
     "copy-gql": "copyfiles --error --up 1 src/graphql/schemas/*.gql dist"
   },
