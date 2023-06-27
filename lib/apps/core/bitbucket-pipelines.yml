@@ -77,10 +77,12 @@ definitions:
           # We don't use npx command here because node is not install on google/cloud-sdk:alpine
           - bash ./node_modules/subito-ci/lib/push-image
 pipelines:
-  default:
-    - step: *audit
-    - step: *test
-    - step: *compile
+  pull-requests:
+    '**':
+      - step: *audit
+      - step: *test
+      - step: *compile
+      - step: *build
   branches:
     develop:
       - step: *audit
