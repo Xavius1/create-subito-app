@@ -70,6 +70,7 @@
     // Init git repository
     console.log('8/8 - Configure husky');
     execSync(`npx husky install`, { cwd: projectPath });
+    execSync(`chmod 755 .husky/pre-commit`, { cwd: projectPath });
     // End
     console.log('Your subito app is ready.')
     console.log('')
