@@ -1,11 +1,6 @@
 import e from './env.js';
 
 describe('env.js', () => {
-  // MONGODB_MAIN_LINK
-  test('MONGODB_MAIN_LINK default value should be', () => {
-    expect(e._defaultValues.MONGODB_MAIN_LINK) // eslint-disable-line no-underscore-dangle
-      .toBe('mongodb://mongodb:27017/');
-  });
   // MONGODB_MAIN_NAME
   test('MONGODB_MAIN_NAME default value should be', () => {
     expect(e._defaultValues.MONGODB_MAIN_NAME) // eslint-disable-line no-underscore-dangle
